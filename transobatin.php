@@ -1,7 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include('head.php');?>
+<?php include('head.php');
+
+$today = date("Ymd");
+$newnum = 1;
+$sql = "SELECT max(id) AS last, kdtrans FROM tobatin";
+$result=$db->query($sql);
+if ($result){
+    $row=$result->fetch_array(MYSQLi_ASSOC);
+    $lastcode=$row['kdtrans'];
+    $lastnum=$subtr($lastcode, 8, 3);
+    $newnum=$lastnum+1;
+}
+$newcode = $today.sprintf('%03s', $newnum);
+    
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    if(isset($_POST[])) ;
+}
+    
+?>
 
  <body class="nav-md">
   <div class="container body">
