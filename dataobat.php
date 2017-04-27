@@ -2,59 +2,60 @@
 <html lang="en">
 
 <?php include('head.php');
-	$editrow=null;
-	$edit = $kdobat = $nmobat = $satuan = $limitstok = $hjual = $hbeli =null;
+    $editrow=null;
+    $edit = $kdobat = $nmobat = $satuan = $limitstok = $hjual = $hbeli =null;
 	
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		if ($_POST['kdobat'] != null ) $kdobat=cek_input($_POST['kdobat']);
-		if ($_POST['nmobat'] != null) $nmobat=cek_input($_POST['nmobat']);
-		if ($_POST['satuan'] != null) $satuan=cek_input($_POST['satuan']);
-		if ($_POST['limit'] != null ) $limitstok=cek_input($_POST['limit']);
-		if ($_POST['hbeli'] != null) $hbeli=cek_input($_POST['hbeli']);
-		if ($_POST['hjual'] != null) $hjual=cek_input($_POST['hjual']);
-		if ($_POST['edit'] != NULL) $edit=cek_input($_POST['edit']);
-		
-		unset($_POST);
-		if ($edit){	
-			$sql = "update tobat set nmobat='$nmobat', satuan='$satuan', limitstok='$limitstok', hbeli='$hbeli', hjual='$hjual' where kdobat='$kdobat' ";
-			$db->query($sql);
-			
-		} else {
-			$sql="insert into tobat (kdobat, nmobat, satuan, limitstok, hbeli, hjual) values ('$kdobat','$nmobat','$satuan', '$limitstok','$hbeli','$hjual') ";
-			$db->query($sql);			
-		}
-		if ($db->affected_rows < 0) {
-				$errmsg = "Error: Update data obat gagal!";
-				$msg->error($errmsg, 'dataobat.php');
-			} else {
-				$msg->success('Update data berhasil!', 'dataobat.php');
-			}
-	} else {
-		if (isset($_GET["edit"])){
-			$edit = $_GET["edit"];
-			$sql = "select * from tobat where id=$edit";
-			$result = $db->query($sql);
-			if ($db->affected_rows > 0) {
-				while ($row = $result->fetch_array(MYSQLI_ASSOC)) {	
-					$kdobat=$row['kdobat'];
-					$nmobat=$row['nmobat'];
-					$satuan=$row['satuan'];
-					$limitstok=$row['limitstok'];
-					$hjual=$row['hjual'];
-					$hbeli=$row['hbeli'];
-				}		
-			}
-		}else if (isset($_GET["hapus"])) {
-			$hapus = $_GET["hapus"];
-			$sql = "delete from tobat where id=$hapus";
-			if (mysqli_query($db, $sql)){
-				$msg->success('Data Sudah di Hapus!', 'dataobat.php');	
-			} else {
-				$errmsg="Error: " . $sql . "<br>" . mysqli_error($db);
-				$msg->error($errmsg);
-			}
-		}
-	}
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['kdobat'])) $kdobat=cek_input($_POST['kdobat']);
+        if (isset($_POST['nmobat'])) $nmobat=cek_input($_POST['nmobat']);
+        if (isset($_POST['satuan'])) $satuan=cek_input($_POST['satuan']);
+        if (isset($_POST['limit'])) $limitstok=cek_input($_POST['limit']);
+        if (isset($_POST['hbeli'])) $hbeli=cek_input($_POST['hbeli']);
+        if (isset($_POST['hjual'])) $hjual=cek_input($_POST['hjual']);
+        if (isset($_POST['edit'])) $edit=cek_input($_POST['edit']);
+        unset($_POST);
+        if($kdobat !='' || $nmobat !='' || $satuan !='' || $limitstok >= 0){
+            if ($edit != ''){	
+                $sql = "update tobat set nmobat='$nmobat', satuan='$satuan', limitstok='$limitstok', hbeli='$hbeli', hjual='$hjual' where kdobat='$kdobat' ";
+                $db->query($sql);
+
+            } else {
+                $sql="insert into tobat (kdobat, nmobat, satuan, limitstok, hbeli, hjual) values ('$kdobat','$nmobat','$satuan', '$limitstok','$hbeli','$hjual') ";
+                $db->query($sql);			
+            }
+            if ($db->affected_rows < 1) {
+                $errmsg = "Error: Update data obat gagal!";
+                $msg->error($errmsg, 'dataobat.php');
+            } else {
+                $msg->success('Update data berhasil!', 'dataobat.php');
+            }
+        } 
+    }else {
+        if (isset($_GET["edit"])){
+            $edit = $_GET["edit"];
+            $sql = "select * from tobat where id=$edit";
+            $result = $db->query($sql);
+            if ($db->affected_rows > 0) {
+                while ($row = $result->fetch_array(MYSQLI_ASSOC)) {	
+                    $kdobat=$row['kdobat'];
+                    $nmobat=$row['nmobat'];
+                    $satuan=$row['satuan'];
+                    $limitstok=$row['limitstok'];
+                    $hjual=$row['hjual'];
+                    $hbeli=$row['hbeli'];
+                }		
+            }
+        }else if (isset($_GET["hapus"])) {
+            $hapus = $_GET["hapus"];
+            $sql = "delete from tobat where id=$hapus";
+            if (mysqli_query($db, $sql)){
+                $msg->success('Data Sudah di Hapus!', 'dataobat.php');	
+            } else {
+                $errmsg="Error: " . $sql . "<br>" . mysqli_error($db);
+                $msg->error($errmsg);
+            }
+        }
+    }
 	
 
 ?>
@@ -178,7 +179,7 @@
                             <a href="<?php echo 'dataobat.php?hapus='.$id;?>" data-toggle="tooltip" title="Hapus"><span class="fa fa-trash" onClick="return confirm('Yakin menghapus data tersebut?')"></span></a>
                             </td>
                             </tr>
-                        <?php $n++ } ?>
+                        <?php } ?>
                         </tbody>
                       </table>                    
                     
