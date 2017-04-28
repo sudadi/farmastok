@@ -8,6 +8,7 @@ $tgltrans = date("Y-m-d");
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if(isset($_POST['filtgl'])) $tgltrans=date('Y-m-d', strtotime($_POST['filtgl']));                                           
 }
+
 ?>
 
  <body class="nav-md">
