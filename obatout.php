@@ -53,13 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql="SELECT `kdtrans`, `nmsat`, sum(`qty`) as `total` "
-                                        . "FROM `tobatout` "
-                                        . "INNER JOIN `tsatelit` ON `tsatelit`.`kdsat` = `tobatout`.`kdsat"
-                                        . "group by `kdtrans`";
+                                        $sql="SELECT `kdtrans`, `nmsat`, sum(`qty`) as `total` FROM `tobatout` INNER JOIN `tsatelit` ON `tsatelit`.`kdsat` = `tobatout`.`kdsat` group by `kdtrans`";
                                         $result=$db->query($sql);
                                         if($result){
-                                            while ($row = $result->fetch_row(MYSQLI_ASSOC)) {
+                                            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                                                 $notrans=$row['kdtrans'];
                                                 ?>
                                         <tr>
@@ -67,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                             <td><?=$row['nmsat'];?></td>
                                             <td><?=$row['total'];?></td>
                                             <td>
-                                                <a href="transobatin.php?kdtransout=<?=$notrans;?>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit fa-lg"></i></a> &nbsp;
+                                                <a href="transobatout.php?kdtrans=<?=$notrans;?>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit fa-lg"></i></a> &nbsp;
 						<a href="#" onclick="showdetail(<?=$notrans?>)" data-toggle="tooltip" title="Detail Transaksi"><i class="fa fa-th-list fa-lg"></i></a>
                                             </td>
                                         </tr>
@@ -84,6 +81,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
         </div>  
     </div>
+    <div id="modaldetail" class="modal fade modaldetail" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">Detail Transaksi Distribusi Obat</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="table-responsive" id="detail"></div>	
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+          </div>
+        </div>
+    </div>
+                
 		<?php include('footer.php'); ?>
     </div>
 </div>

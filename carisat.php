@@ -13,7 +13,7 @@ if(!empty($_POST['field']) && !empty($_POST['name_startsWith'])){
 		$field = 'nmsat';
 	} 
 	$name = $_POST['name_startsWith'];
-	$query = "SELECT * FROM tsat WHERE $field LIKE '%$name%' order by kdsat";
+	$query = "SELECT * FROM tsatelit WHERE $field LIKE '%$name%' order by kdsat";
 	$result = $db->query($query);
 	$data = array();
 	while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
