@@ -5,8 +5,13 @@
 			console.log(tipe);
 			if(tipe[0] == 'kd' ) autoTypeNo=0;
 			if(tipe[0] == 'nm' ) autoTypeNo=1; 
-			if(tipe[1] == 'supp') { ajaxurl='carisupp.php'; }
-				else { ajaxurl='cariobat.php'; }
+			if(tipe[1] == 'supp') { 
+                            ajaxurl='carisupp.php'; 
+                        }else if(tipe[1] == 'obat') { 
+                            ajaxurl='cariobat.php'; 
+                        }else{
+                            ajaxurl='carisat.php'
+                        }
 			$(this).autocomplete({
 				source: function( request, response ) {
 					$.ajax({
@@ -38,10 +43,13 @@
 						$('#kdsupp').val(names[0]);
 						$('#nmsupp').val(names[1]);
 						$('#almsupp').val(names[2]);
-					} else {
+					} else if ( tipe[1] == 'obat' ){
 						$('#kdobat').val(names[0]);
 						$('#nmobat').val(names[1]);
-					}
+					} else {
+                                            $('#kdsat').val(names[0]);
+                                            $('#nmsat').val(names[1]);
+                                        }
 				}
 			});
 		});
