@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			</thead>
 			<tbody>
 				<?php
-				$sql="SELECT tobatin.*, tobat.nmobat FROM tobatin INNER JOIN tobat on tobatin.kdobat=tobat.kdobat WHERE kdtrans='$kdtrans'";
+				$sql="SELECT tobatout.*, tobat.nmobat FROM tobatout INNER JOIN tobat on tobatout.kdobat=tobat.kdobat WHERE kdtrans='$kdtrans'";
 				$result=$db->query($sql);
 				if ($result){
 					while ($row = $result->fetch_array(MYSQLI_ASSOC)){ 
