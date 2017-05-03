@@ -21,19 +21,19 @@ function newtrans(){
 }
 
 function getsession(){
-	global $kdtrans, $kdsupp, $nmsupp;
-	$kdtrans=$_SESSION['kdtrans'];
-	$kdsupp=$_SESSION['kdsupp'];
-	$nmsupp=$_SESSION['nmsupp'];
-	$nm_supp=$_SESSION['almsupp'];
+    global $kdtrans, $kdsupp, $nmsupp;
+    $kdtrans=$_SESSION['kdtrans'];
+    $kdsupp=$_SESSION['kdsupp'];
+    $nmsupp=$_SESSION['nmsupp'];
+    $almsupp=$_SESSION['almsupp'];
 }
 
 function setsession(){
-	global $kdtrans, $kdsupp, $nmsupp, $almsupp;
-	$_SESSION['kdtrans'] = $kdtrans;
+    global $kdtrans, $kdsupp, $nmsupp, $almsupp;
+    $_SESSION['kdtrans'] = $kdtrans;
     $_SESSION['kdsupp'] = $kdsupp;
     $_SESSION['nmsupp'] = $nmsupp;
-	$_SESSION['almsupp'] = $almsupp;
+    $_SESSION['almsupp'] = $almsupp;
 }
 
 function unsetsession() {

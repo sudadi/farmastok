@@ -2,12 +2,12 @@
 <html lang="en">
 
 <?php include('head.php');
-$kdtrans = $kdsupp = $nmsupp = $almsupp = $kdobat = $nmobat = $edit = $onlyread = $hide ='' ;
+$kdtrans = $kdsat = $nmsat = $kdobat = $nmobat = $edit = $onlyread ='' ;
 $qty='';
 function newtrans(){
 	global $db;
 	$today = date("Ymd");
-    $sql = "SELECT max(kdtrans) AS last FROM tobatin where kdtrans like '$today%'";
+    $sql = "SELECT max(kdtrans) AS last FROM tobatout where kdtrans like '$today%'";
     $result=$db->query($sql);
     if ($result){
         $row=$result->fetch_array(MYSQLI_ASSOC);
@@ -17,27 +17,25 @@ function newtrans(){
         $notrans = $today.sprintf('%03s', $nobaru);
         $result->close();
     }
-    return $notrans;
 }
 
 function getsession(){
-	global $kdtrans, $kdsupp, $nmsupp;
-	$kdtrans=$_SESSION['kdtrans'];
-	$kdsupp=$_SESSION['kdsupp'];
-	$nmsupp=$_SESSION['nmsupp'];
-	$nm_supp=$_SESSION['almsupp'];
+    global $kdtrans, $kdsat, $nmsat;
+    $kdtrans=$_SESSION['kdtransout'];
+    $kdsat=$_SESSION['kdsat'];
+    $nmsat=$_SESSION['nmsat'];
 }
 
 function setsession(){
-	global $kdtrans, $kdsupp, $nmsupp, $almsupp;
-	$_SESSION['kdtrans'] = $kdtrans;
-    $_SESSION['kdsupp'] = $kdsupp;
-    $_SESSION['nmsupp'] = $nmsupp;
-	$_SESSION['almsupp'] = $almsupp;
+    global $kdtrans, $kdsat, $nmsat;
+    $_SESSION['kdtransout'] = $kdtrans;
+    $_SESSION['kdsat'] = $kdsat;
+    $_SESSION['nmsat'] = $nmsat;
+   
 }
 
 function unsetsession() {
-	$unsetvar = array('kdtrans', 'kdsupp', 'nmsupp', 'almsupp');
+	$unsetvar = array('kdtrans', 'kdsat', 'nmsat');
     foreach($unsetvar as $var) {
         unset($_SESSION[$var]);
     }
@@ -57,48 +55,46 @@ function pesan(){
 
 if($_SERVER['REQUEST_METHOD'] === "POST"){
     if(isset($_POST['new'])) {
-    	if (isset($_SESSION['kdtrans'])){
-	       getsession();
+    	if (isset($_SESSION['kdtransout'])){
+            getsession();
         }else {
-			$kdtrans=newtrans();
-		}
-	} else {
-		if(isset($_POST['edit'])) $edit = $_POST['edit'];
+            $kdtrans=newtrans();
+        }
+    } else {
+        if(isset($_POST['edit'])) $edit = $_POST['edit'];
         if(isset($_POST['kdtrans'])) $kdtrans=$_POST['kdtrans'];
-        if(isset($_POST['kdsupp'])) $kdsupp = cek_input ($_POST['kdsupp']);
-        if(isset($_POST['nmsupp'])) $nmsupp = cek_input ($_POST['nmsupp']);
-		if(isset($_POST['almsupp'])) $almsupp = cek_input($_POST['almsupp']);
+        if(isset($_POST['kdsat'])) $kdsat = cek_input ($_POST['kdsat']);
+        if(isset($_POST['nmsat'])) $nmsat = cek_input ($_POST['nmsat']);
         if(isset($_POST['kdobat'])) $kdobat = cek_input($_POST['kdobat']);
         if (isset($_POST['nmobat'])) $nmobat = cek_input($_POST['nmobat']);
         if (isset($_POST['qty'])) $qty = cek_input ($_POST['qty']);
-        
-        if($kdtrans!='' || $kdsupp!='' || $nmsupp!='' || $kdobat!='' || $nmobat!='' || $qty<1){
-        	if ($edit !=''){ //jika edit data
-				$sql = "update tobatin set kdsupp='$kdsupp', kdobat='$kdobat', qty='$qty' where id='$edit'";
+
+        if($kdtrans!='' || $kdsat!='' || $nmsat!='' || $kdobat!='' || $nmobat!='' || $qty<1){
+            if ($edit !=''){ //jika edit data
+                $sql = "update tobatout set kdsat='$kdsat', kdobat='$kdobat', qty='$qty' where id='$edit'";
                 $db->query($sql);
-			}else { //insert data 
-				$sql="INSERT INTO `tobatin` (`kdtrans`, `kdsupp`, `tgltrans`, `kdobat`, `qty`) values ('$kdtrans', '$kdsupp', CURRENT_DATE, '$kdobat', '$qty') ON DUPLICATE KEY UPDATE qty = qty+$qty";
+            }else { //insert data 
+                $sql="INSERT INTO `tobatout` (`kdtrans`, `kdsat`, `kdobat`, `qty`) values ('$kdtrans', '$kdsat', '$kdobat', '$qty') ON DUPLICATE KEY UPDATE qty = qty+$qty";
                 $db->query($sql);
-			}
-			setsession();
+            }
+            setsession();
             pesan();
         }
-	}
+    }
 }else {
-	if(isset($_GET['kdtrans']) && $_GET['kdtrans'] !=''){
+    if(isset($_GET['kdtrans']) && $_GET['kdtrans'] !=''){
         $kdtrans=cek_input($_GET['kdtrans']);
-		$sql="SELECT tsupp.* FROM tsupp INNER JOIN tobatin ON tsupp.kdsupp = tobatin.kdsupp  WHERE kdtrans ='$kdtrans' GROUP BY kdtrans"; 
-		$result=$db->query($sql);
-		if ($result->num_rows == 1){
-			$row=$result->fetch_array(MYSQLI_ASSOC);
-			$kdsupp=$row['kdsupp'];
-			$nmsupp=$row['nmsupp'];
-			$almsupp=$row['almsupp'];
-			setsession();	
-		}
+        $sql="SELECT tsat.* FROM tsat INNER JOIN tobatout ON tsat.kdsat = tobatout.kdsat  WHERE kdtrans ='$kdtrans' GROUP BY kdtrans"; 
+        $result=$db->query($sql);
+        if ($result->num_rows == 1){
+            $row=$result->fetch_array(MYSQLI_ASSOC);
+            $kdsat=$row['kdsat'];
+            $nmsat=$row['nmsat'];
+            setsession();	
+        }
     } else if(isset($_GET['edit']) && $_GET['edit'] != ''){
         $edit = cek_input($_GET['edit']);
-        $sql="select tobat.kdobat, nmobat, qty from tobatin inner join tobat on tobatin.kdobat=tobat.kdobat where tobatin.id='$edit'";
+        $sql="select tobat.kdobat, nmobat, qty from tobatout inner join tobat on tobatout.kdobat=tobat.kdobat where tobatout.id='$edit'";
         $result=$db->query($sql);
         if($result->num_rows == 1){
             $row = $result->fetch_array(MYSQLI_ASSOC);
@@ -108,21 +104,21 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 		}
     } elseif (isset ($_GET['hapus']) && $_GET['hapus'] !='') {
         $hapus= cek_input($_GET['hapus']);
-        $sql="delete from tobatin where id = '$hapus'";
+        $sql="delete from tobatout where id = '$hapus'";
         $db->query($sql);
         pesan();
     } else if (isset($_GET['selesai']) && $_GET['selesai'] = true){
         unsetsession();
-        header('location:obatin.php');
+        header('location:obatout.php');
     }
-	if (isset($_SESSION['kdtrans'])) {
+    if (isset($_SESSION['kdtrans'])) {
     	getsession();	
     }else{
-        header("location:obatin.php");
+        header("location:obatout.php");
     }   
 }
 
-if (isset($_SESSION['kdsupp']) && $_SESSION['kdsupp']!=''){
+if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
 	$onlyread='readonly';
 }       	
    
@@ -156,13 +152,13 @@ if (isset($_SESSION['kdsupp']) && $_SESSION['kdsupp']!=''){
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="kdsupp">Kode Supplier</label>
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="kdsat">Kode Depo</label>
                         <div class="col-md-2 col-sm-2 col-xs-12">
-                            <input type="text" id="kdsupp" name="kdsupp" data-type="kd_supp" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Kode Supplier" value="<?=$kdsupp;?>" <?=$onlyread;?> autocomplete="off"/>
+                            <input type="text" id="kdsat" name="kdsat" data-type="kd_sat" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Kode Supplier" value="<?=$kdsat;?>" <?=$onlyread;?> autocomplete="off"/>
                         </div>
-                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="nmsupp">Nama Supplier</label>
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="nmsat">Nama Depo</label>
                         <div class="col-md-5 col-sm-5 col-xs-12">
-                            <input type="text" id="nmsupp" name="nmsupp" data-type="nm_supp" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Nama supplier" value="<?=$nmsupp;?>" <?=$onlyread;?> autocomplete="off"/>
+                            <input type="text" id="nmsat" name="nmsat" data-type="nm_sat" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Nama supplier" value="<?=$nmsat;?>" <?=$onlyread;?> autocomplete="off"/>
                         </div>                        
                       </div>
                       <div class="form-group">
@@ -185,7 +181,6 @@ if (isset($_SESSION['kdsupp']) && $_SESSION['kdsupp']!=''){
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
                           <input type="hidden" name="edit" value="<?=$edit;?>"/>
-						  <input type="hidden" id="almsupp" name="almsupp" value="<?=$almsupp;?>"> 
                           <button type="submit" class="btn btn-success"><?=$edit ? 'Update' : 'Simpan';?></button>
                           <a href="transobatin.php?selesai=true" class="btn btn-warning">Selesai</a>
                         </div>
@@ -205,8 +200,8 @@ if (isset($_SESSION['kdsupp']) && $_SESSION['kdsupp']!=''){
                             <div class="row invoice-info">
                                 <div class="col-sm-4 invoice-col">
                                   <address>
-                                      Supplier : <strong><?=$nmsupp;?></strong>
-                                      <br><?=$almsupp?>
+                                      Supplier : <strong><?=$nmsat;?></strong>
+                                      <br>
                                   </address>
                                 </div>
                                 <!-- /.col -->
@@ -233,7 +228,7 @@ if (isset($_SESSION['kdsupp']) && $_SESSION['kdsupp']!=''){
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql="SELECT tobatin.*, tobat.nmobat FROM tobatin INNER JOIN tobat on tobatin.kdobat=tobat.kdobat WHERE kdtrans='$kdtrans'";
+                                    $sql="SELECT tobatout.*, tobat.nmobat FROM tobatout INNER JOIN tobat on tobatout.kdobat=tobat.kdobat WHERE kdtrans='$kdtrans'";
                                     $result=$db->query($sql);
                                     if ($result){
                                         while ($row = $result->fetch_array(MYSQLI_ASSOC)){ 
@@ -269,7 +264,7 @@ if (isset($_SESSION['kdsupp']) && $_SESSION['kdsupp']!=''){
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Detail Disposisi</h4>
+				<h4 class="modal-title">Detail Transaksi Distribusi Obat</h4>
 			</div>
 			<div class="modal-body">
 				<div class="table-responsive" id="detail">
