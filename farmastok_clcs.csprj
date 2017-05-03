@@ -1,0 +1,240 @@
+<codestructure version="5.11">
+<phptree>
+<treenode node="dbconfig.php;PHP:PHP Include;D:\xampp\htdocs\farmastok\login.php;f12;3;24;3;;D:\xampp\htdocs\farmastok\head.php;f9;2;21;2;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="FlashMessages.php;PHP:PHP Include;D:\xampp\htdocs\farmastok\head.php;f9;4;26;4;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="footer.php;PHP:PHP Include;Codelobster3.php;f17;88;27;88;;Codelobster7.php;f17;33;27;33;;Codelobster8.php;f17;33;27;33;;Codelobster9.php;f17;33;27;33;;Codelobster1.php;f16;146;26;146;;Codelobster2.php;f16;145;26;145;;Codelobster5.php;f17;50;27;50;;Codelobster4.php;f17;49;27;49;;D:\xampp\htdocs\farmastok\ubahsandi.php;f17;88;27;88;;D:\xampp\htdocs\farmastok\obatout.php;f17;50;27;50;;D:\xampp\htdocs\farmastok\lapstok.php;f17;33;27;33;;D:\xampp\htdocs\farmastok\lapout.php;f17;33;27;33;;D:\xampp\htdocs\farmastok\lapin.php;f17;33;27;33;;D:\xampp\htdocs\farmastok\index.php;f17;16;27;16;;D:\xampp\htdocs\farmastok\datasupp.php;f16;146;26;146;;D:\xampp\htdocs\farmastok\dataobat.php;f17;190;27;190;;D:\xampp\htdocs\farmastok\datasat.php;f16;145;26;145;;D:\xampp\htdocs\farmastok\obatin.php;f17;68;27;68;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="footerjs.php;PHP:PHP Include;Codelobster3.php;f15;91;27;91;;Codelobster7.php;f15;36;27;36;;Codelobster8.php;f15;36;27;36;;Codelobster9.php;f15;36;27;36;;Codelobster1.php;f15;149;27;149;;Codelobster2.php;f15;148;27;148;;Codelobster5.php;f15;53;27;53;;Codelobster4.php;f15;52;27;52;;D:\xampp\htdocs\farmastok\ubahsandi.php;f15;91;27;91;;D:\xampp\htdocs\farmastok\obatout.php;f15;53;27;53;;D:\xampp\htdocs\farmastok\lapstok.php;f15;36;27;36;;D:\xampp\htdocs\farmastok\lapout.php;f15;36;27;36;;D:\xampp\htdocs\farmastok\lapin.php;f15;36;27;36;;D:\xampp\htdocs\farmastok\index.php;f15;19;27;19;;D:\xampp\htdocs\farmastok\datasupp.php;f15;149;27;149;;D:\xampp\htdocs\farmastok\dataobat.php;f15;193;27;193;;D:\xampp\htdocs\farmastok\datasat.php;f15;148;27;148;;D:\xampp\htdocs\farmastok\obatin.php;f15;71;27;71;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="head.php;PHP:PHP Include;Codelobster3.php;f15;3;23;3;;Codelobster7.php;f15;3;23;3;;Codelobster8.php;f15;3;23;3;;Codelobster9.php;f15;3;23;3;;Codelobster1.php;f15;3;23;3;;Codelobster2.php;f15;3;23;3;;Codelobster5.php;f15;3;23;3;;Codelobster4.php;f15;3;23;3;;D:\xampp\htdocs\farmastok\ubahsandi.php;f15;3;23;3;;D:\xampp\htdocs\farmastok\obatout.php;f15;3;23;3;;D:\xampp\htdocs\farmastok\lapstok.php;f15;3;23;3;;D:\xampp\htdocs\farmastok\lapout.php;f15;3;23;3;;D:\xampp\htdocs\farmastok\lapin.php;f15;3;23;3;;D:\xampp\htdocs\farmastok\index.php;f15;3;23;3;;D:\xampp\htdocs\farmastok\datasupp.php;f15;3;23;3;;D:\xampp\htdocs\farmastok\dataobat.php;f15;3;23;3;;D:\xampp\htdocs\farmastok\datasat.php;f15;3;23;3;;D:\xampp\htdocs\farmastok\obatin.php;f15;3;23;3;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="session.php;PHP:PHP Include;D:\xampp\htdocs\farmastok\head.php;f9;3;20;3;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="sidemenu.php;PHP:PHP Include;Codelobster3.php;f10;37;22;37;;Codelobster7.php;f10;10;22;10;;Codelobster8.php;f10;10;22;10;;Codelobster9.php;f10;10;22;10;;Codelobster1.php;f10;58;22;58;;Codelobster2.php;f10;57;22;57;;Codelobster5.php;f10;10;22;10;;Codelobster4.php;f10;10;22;10;;D:\xampp\htdocs\farmastok\ubahsandi.php;f10;37;22;37;;D:\xampp\htdocs\farmastok\obatout.php;f10;10;22;10;;D:\xampp\htdocs\farmastok\lapstok.php;f10;10;22;10;;D:\xampp\htdocs\farmastok\lapout.php;f10;10;22;10;;D:\xampp\htdocs\farmastok\lapin.php;f10;10;22;10;;D:\xampp\htdocs\farmastok\index.php;f10;10;22;10;;D:\xampp\htdocs\farmastok\datasupp.php;f10;58;22;58;;D:\xampp\htdocs\farmastok\dataobat.php;f10;66;22;66;;D:\xampp\htdocs\farmastok\datasat.php;f10;57;22;57;;D:\xampp\htdocs\farmastok\obatin.php;f10;13;22;13;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="topnav.php;PHP:PHP Include;Codelobster3.php;f10;36;20;36;;Codelobster7.php;f10;9;20;9;;Codelobster8.php;f10;9;20;9;;Codelobster9.php;f10;9;20;9;;Codelobster1.php;f10;57;20;57;;Codelobster2.php;f10;56;20;56;;Codelobster5.php;f10;9;20;9;;Codelobster4.php;f10;9;20;9;;D:\xampp\htdocs\farmastok\ubahsandi.php;f10;36;20;36;;D:\xampp\htdocs\farmastok\obatout.php;f10;9;20;9;;D:\xampp\htdocs\farmastok\lapstok.php;f10;9;20;9;;D:\xampp\htdocs\farmastok\lapout.php;f10;9;20;9;;D:\xampp\htdocs\farmastok\lapin.php;f10;9;20;9;;D:\xampp\htdocs\farmastok\index.php;f10;9;20;9;;D:\xampp\htdocs\farmastok\datasupp.php;f10;57;20;57;;D:\xampp\htdocs\farmastok\dataobat.php;f10;65;20;65;;D:\xampp\htdocs\farmastok\datasat.php;f10;56;20;56;;D:\xampp\htdocs\farmastok\obatin.php;f10;12;20;12;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="FlashMessages;PHP:Class Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f0;3;1;443;;;;vpos;;v;;r;;d20,3;;b0,0;;m">
+<treenode node="defaultType;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f9;12;21;12;;;;vpos;;v;;r&apos;&apos;;;d-1,-1;;b0,0;;m">
+<treenode node="self;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f23;12;28;12;;;;vpos;;v;;rtrue) 
+    {
+
+        if (!isset($_SESSION[&apos;flash_messages&apos;])) return false;;d-1,-1;;b0,0;;m">
+<treenode node="INFO;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f30;12;34;12;;;;vpos;;v;;rself::INFO;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="self;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f0;25;12;25;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+<treenode node="ERROR;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f14;25;19;25;;;;vpos;;v;;r&apos;alert dismissable&apos;;;d-1,-1;;b0,0;;m">
+<treenode node="self;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f0;26;12;26;;;;vpos;;v;;r&apos;sticky&apos;;;d-1,-1;;b0,0;;m">
+<treenode node="WARNING;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f14;26;21;26;;;;vpos;;v;;r&apos;&lt;button type=&quot;button&quot; class=&quot;close&quot; 
+                                data-dismiss=&quot;alert&quot; 
+                                aria-label=&quot;Close&quot;&gt;
+                                &lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;s&lt;/span&gt;
+                            &lt;/button&gt;&apos;;;d-1,-1;;b0,0;;m">
+<treenode node="self;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f0;27;12;27;;;;vpos;;v;;r&apos;&apos;;;d-1,-1;;b0,0;;m">
+<treenode node="SUCCESS;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f14;27;21;27;;;;vpos;;v;;r&apos;&apos;;;d-1,-1;;b0,0;;m">
+<treenode node="self;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f0;28;12;28;;;;vpos;;v;;r&quot;&lt;div class=&apos;%s&apos;&gt;%s&lt;/div&gt;\n&quot;;;d-1,-1;;b0,0;;m">
+<treenode node="INFO;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f14;28;18;28;;;;vpos;;v;;r[
+        self::ERROR   =&gt; &apos;error&apos;,
+        self::WARNING =&gt; &apos;warning&apos;, 
+        self::SUCCESS =&gt; &apos;success&apos;, 
+        self::INFO    =&gt; &apos;info&apos;, 
+    ];;d-1,-1;;b0,0;;m">
+</treenode>
+</treenode>
+</treenode>
+</treenode>
+</treenode>
+</treenode>
+</treenode>
+<treenode node="self;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f0;49;12;49;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+<treenode node="INFO;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f14;49;18;49;;;;vpos;;v;;r[&apos;sticky&apos; =&gt; $sticky, &apos;message&apos; =&gt; $message];;d-1,-1;;b0,0;;m">
+<treenode node="msgTypes;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f44;165;52;165;;;;vpos;;v;;rarray();;d-1,-1;;b0,0;;m">
+<treenode node="defaultType;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f70;165;81;165;;;;vpos;;v;;r$this-&gt;defaultType;;d-1,-1;;b0,0;;m">
+</treenode>
+</treenode>
+<treenode node="self;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f0;50;12;50;;;;vpos;;v;;rstrtolower($type[0]);;d-1,-1;;b0,0;;m">
+<treenode node="SUCCESS;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f14;50;21;50;;;;vpos;;v;;rfalse) 
+    {
+
+        // Make sure a message and valid type was passed
+        if (!isset($message[0])) return false;;d-1,-1;;b0,0;;m">
+<treenode node="defaultType;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f73;144;84;144;;;;vpos;;v;;rself::defaultType)
+    {   
+        return $this-&gt;add($message, $type, $redirectUrl, true);;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="ERROR;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f42;132;47;132;;;;vpos;;v;;rfalse)
+    {
+        return $this-&gt;add($message, self::ERROR, $redirectUrl, $sticky);;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="INFO;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f42;90;46;90;;;;vpos;;v;;rfalse)
+    {
+        return $this-&gt;add($message, self::INFO, $redirectUrl, $sticky);;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="self;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f0;51;12;51;;;;vpos;;v;;r[];;d-1,-1;;b0,0;;m">
+<treenode node="msgId;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f15;72;20;72;;;;vpos;;v;;rsha1(uniqid());;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="WARNING;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f14;51;21;51;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+<treenode node="self;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f0;52;12;52;;;;vpos;;v;;rnull;;d-1,-1;;b0,0;;m">
+<treenode node="ERROR;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f14;52;19;52;;;;vpos;;v;;r[ 
+        self::INFO    =&gt; &apos;alert-info&apos;,
+        self::SUCCESS =&gt; &apos;alert-success&apos;,
+        self::WARNING =&gt; &apos;alert-warning&apos;,
+        self::ERROR   =&gt; &apos;alert-danger&apos;,
+    ];;d-1,-1;;b0,0;;m">
+</treenode>
+</treenode>
+</treenode>
+</treenode>
+<treenode node="SUCCESS;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f42;104;49;104;;;;vpos;;v;;rfalse)
+    {
+        return $this-&gt;add($message, self::SUCCESS, $redirectUrl, $sticky);;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="WARNING;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f42;118;49;118;;;;vpos;;v;;rfalse)
+    {
+        return $this-&gt;add($message, self::WARNING, $redirectUrl, $sticky);;d-1,-1;;b0,0;;m">
+</treenode>
+</treenode>
+</treenode>
+</treenode>
+<treenode node="redirectUrl;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f43;172;54;172;;;;vpos;;v;;r$redirectUrl;;d-1,-1;;b0,0;;m">
+</treenode>
+</treenode>
+</treenode>
+</treenode>
+</treenode>
+<treenode node="ERROR;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f9;9;15;9;;;;vpos;;v;;r&apos;e&apos;;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="INFO;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f9;6;14;6;;;;vpos;;v;;r&apos;i&apos;;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="SUCCESS;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f9;7;17;7;;;;vpos;;v;;r&apos;s&apos;;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="WARNING;PHP:PHP Word;D:\xampp\htdocs\farmastok\FlashMessages.php;f9;8;17;8;;;;vpos;;v;;r&apos;w&apos;;;d-1,-1;;b0,0;;m">
+</treenode>
+<treenode node="clear;PHP:Function Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f14;317;5;330;;;;vpos;;vobject;;r
+Definition
+    clear($types=[])
+
+Description
+     Clear the messages from the session data
+
+Parameters:
+    mixed $types - (array) Clear all of the message types in array;;d4,318;;b2,0;;mmixed $types;;p">
+</treenode>
+<treenode node="doRedirect;PHP:Function Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f14;300;5;307;;;;vpos;;vobject;;r
+Definition
+    doRedirect()
+
+Description
+     Redirect the user if a URL was given;;d4,301;;b2,0;;m">
+</treenode>
+<treenode node="formatMessage;PHP:Function Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f14;268;5;292;;;;vpos;;vstring;;r
+Definition
+    formatMessage($msgDataArray, $type)
+
+Description
+     Format a message
+
+Parameters:
+    array $msgDataArray - Array of message data
+    string $type - The $msgType
+
+Return:
+   The formatted message;;d4,269;;b2,0;;marray $msgDataArray;;pstring $type;;p">
+</treenode>
+<treenode node="hasErrors;PHP:Function Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f11;237;5;240;;;;vpos;;vboolean;;r
+Definition
+    hasErrors()
+
+Description
+     See if there are any queued error messages;;d4,238;;b1,0;;m">
+</treenode>
+<treenode node="hasMessages;PHP:Function Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f11;249;5;258;;;;vpos;;vboolean;;r
+Definition
+    hasMessages($type=null)
+
+Description
+     See if there are any queued message
+
+Parameters:
+    string $type - The $msgType;;d44,249;;b1,0;;mstring $type;;p">
+</treenode>
+<treenode node="setCloseBtn;PHP:Function Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f11;383;5;387;;;;vpos;;vobject;;r
+Definition
+    setCloseBtn($closeBtn=&apos;&apos;)
+
+Description
+     Set the HTML for the close button
+
+Parameters:
+    string $closeBtn - HTML to use for the close button;;d4,384;;b1,0;;mstring $closeBtn;;p">
+</treenode>
+<treenode node="setCssClassMap;PHP:Function Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f11;426;5;440;;;;vpos;;vobject;;r
+Definition
+    setCssClassMap($msgType, $cssClass=null)
+
+Description
+     Set the CSS classes for message types
+
+Parameters:
+    mixed $msgType - (string) The message type
+    mixed $cssClass - (string) the CSS class to use;;d4,427;;b1,0;;mmixed $msgType;;pmixed $cssClass;;p">
+</treenode>
+<treenode node="setMsgAfter;PHP:Function Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f11;370;5;374;;;;vpos;;vobject;;r
+Definition
+    setMsgAfter($msgAfter=&apos;&apos;)
+
+Description
+     Append string to the message (inside of the message wrapper)
+
+Parameters:
+    string $msgAfter - string to append to the message;;d4,371;;b1,0;;mstring $msgAfter;;p">
+</treenode>
+<treenode node="setMsgBefore;PHP:Function Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f11;357;5;361;;;;vpos;;vobject;;r
+Definition
+    setMsgBefore($msgBefore=&apos;&apos;)
+
+Description
+     Prepend string to the message (inside of the message wrapper)
+
+Parameters:
+    string $msgBefore - string to prepend to the message;;d4,358;;b1,0;;mstring $msgBefore;;p">
+</treenode>
+<treenode node="setMsgCssClass;PHP:Function Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f11;410;5;414;;;;vpos;;vobject;;r
+Definition
+    setMsgCssClass($msgCssClass=&apos;&apos;)
+
+Description
+     Set the CSS class for messages
+
+Parameters:
+    string $msgCssClass - The CSS class to use for messages;;d4,411;;b1,0;;mstring $msgCssClass;;p">
+</treenode>
+<treenode node="setMsgWrapper;PHP:Function Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f11;344;5;348;;;;vpos;;vobject;;r
+Definition
+    setMsgWrapper($msgWrapper=&apos;&apos;)
+
+Description
+     Set the HTML that each message is wrapped in
+
+Parameters:
+    string $msgWrapper - The HTML that each message is wrapped in;;d4,345;;b1,0;;mstring $msgWrapper;;p">
+</treenode>
+<treenode node="setStickyCssClass;PHP:Function Name;D:\xampp\htdocs\farmastok\FlashMessages.php;f11;396;5;400;;;;vpos;;vobject;;r
+Definition
+    setStickyCssClass($stickyCssClass=&apos;&apos;)
+
+Description
+     Set the CSS class for sticky notes
+
+Parameters:
+    string $stickyCssClass - the CSS class to use for sticky messages;;d4,397;;b1,0;;mstring $stickyCssClass;;p">
+</treenode>
+</treenode>
+<treenode node="cek_input;PHP:Function Name;D:\xampp\htdocs\farmastok\head.php;f0;7;1;12;;;;vpos;;v;;r;;d26,7;;b0,0;;mdata;;p">
+</treenode>
+<treenode node="getContent;PHP:Function Name;D:\xampp\htdocs\farmastok\vendors\jQuery-Smart-Wizard\more_examples\services\service.php;f1;10;2;62;;;;vpos;;v;;r;;d22,10;;b0,0;;m">
+</treenode>
+</phptree>
+</codestructure>
