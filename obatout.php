@@ -27,7 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <a href="transobatout.php" class="btn btn-primary"><i class="fa fa-plus-square fa-lg"></i> Trans. Pengeluaran Obat</a>
+                            <form action="transobatout.php" method="post">
+                                <input type="hidden" name="new" value="true">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus-square"></i> Trans. Pengeluaran Obat</button>
+                            </form> 
                             <br /><br />
                             <form action="obatin.php" method="post" data-parsley-validate class="form-horizontal form-label-left">
                                 <div class="form-group">
