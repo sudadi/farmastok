@@ -5,8 +5,8 @@
 $kdtrans = $kdsat = $nmsat = $kdobat = $nmobat = $edit = $onlyread ='' ;
 $qty='';
 function newtrans(){
-	global $db;
-	$today = date("Ymd");
+    global $db;
+    $today = date("Ymd");
     $sql = "SELECT max(kdtrans) AS last FROM tobatout where kdtrans like '$today%'";
     $result=$db->query($sql);
     if ($result){
@@ -17,6 +17,7 @@ function newtrans(){
         $notrans = $today.sprintf('%03s', $nobaru);
         $result->close();
     }
+    return $notrans;
 }
 
 function getsession(){
@@ -154,7 +155,7 @@ if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
                       <div class="form-group">
                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="kdsat">Kode Depo</label>
                         <div class="col-md-2 col-sm-2 col-xs-12">
-                            <input type="text" id="kdsat" name="kdsat" data-type="kd_sat" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Kode Supplier" value="<?=$kdsat;?>" <?=$onlyread;?> autocomplete="off"/>
+                            <input type="text" id="kdsat" name="kdsat" data-type="kd_sat" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Kode Depo" value="<?=$kdsat;?>" <?=$onlyread;?> autocomplete="off"/>
                         </div>
                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="nmsat">Nama Depo</label>
                         <div class="col-md-5 col-sm-5 col-xs-12">
@@ -167,7 +168,7 @@ if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
                             <input type="text" id="kdobat" name="kdobat" data-type="kd_obat" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Kode Obat" value="<?=$kdobat;?>" autocomplete="off"/>
                         </div>
                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="nmobat">Nama Obat</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-5 col-sm-5 col-xs-12">
                             <input type="text" id="nmobat" name="nmobat" data-type="nm_obat" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Nama Obat" value="<?=$nmobat;?>" autocomplete="off"/>
                         </div>
                       </div>
@@ -200,7 +201,7 @@ if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
                             <div class="row invoice-info">
                                 <div class="col-sm-4 invoice-col">
                                   <address>
-                                      Supplier : <strong><?=$nmsat;?></strong>
+                                      Depo : <strong><?=$nmsat;?></strong>
                                       <br>
                                   </address>
                                 </div>
@@ -257,7 +258,7 @@ if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
         </div>  
     </div>
     
-    <!-- Modal Cari Supplier-->
+    <!-- Modal Cari Depo-->
 	<div id="modalcarisupp" class="modal fade modalcarisupp" role="dialog">
 	  <div class="modal-dialog modal-lg">
 		<!-- Modal content-->
