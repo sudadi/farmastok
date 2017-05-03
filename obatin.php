@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <input type="hidden" name="new" value="true">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-plus-square"></i> Trans. Penerimaan Obat</button>
                     </form> 
-                  <br /><br />
+                  <br />
                   <form action="obatin.php" method="post" data-parsley-validate class="form-horizontal form-label-left">
                     <div class="form-group">
                         <label for="filtgl" class="control-label col-sm-2">Filter Tanggal</label>
@@ -68,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 									echo "<td>".$row['nmsupp']."</td>";
 									echo "<td>".$row['tgltrans']."</td> ";
 									echo "<td>".$row['total']."</td>";
-									echo "<td><a href='transobatin.php?edit=$notrans' data-toggle='tooltip' title='Edit'><i class='fa fa-edit'></i></a> &nbsp";
-									echo "<a href='transobatin.php?hapus=$notrans' data-toggle='tooltip' title='Hapus' onClick='return confirm(\"Yakin menghapus data tersebut?\")'><i class='fa fa-trash'></i></a> ";
+									echo "<td><a href='transobatin.php?kdtrans=$notrans' data-toggle='tooltip' title='Edit'><i class='fa fa-edit fa-lg'></i></a> &nbsp";
+									echo "<a href='#' onclick=\"showdetail('$notrans');\" data-toggle='tooltip' title='Detail Transaksi'><i class='fa fa-th-list fa-lg'></i></a></td>";
 									echo "</tr>";								
                                     $n++;
 								}								
@@ -85,9 +85,43 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           </div>
     	</div>  
 	  </div>
-		<?php include('footer.php'); ?>
+	  <div id="modaldetail" class="modal fade modaldetail" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+		  <div class="modal-content">
+
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+			  </button>
+			  <h4 class="modal-title" id="myModalLabel">Detail Transaksi Penerimaan Obat</h4>
+			</div>
+			<div class="modal-body">
+			  <div class="table-responsive" id="detail"></div>	
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+
+		  </div>
+		</div>
+	  </div>
+	  
+	  <?php include('footer.php'); ?>
 	</div>
   </div>
 <?php include('footerjs.php'); ?>
+
+<script>
+function showdetail(notrans) {
+	$.ajax({
+	type:"post",
+	url	:"ajaxobatin.php",
+	data:"notrans="+notrans,
+	success:function(data){
+		$("#detail").html(data);
+		$('#modaldetail').modal('show');
+	}
+	});
+}
+</script>
 </body>
 </html>
