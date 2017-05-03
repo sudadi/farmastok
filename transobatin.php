@@ -171,7 +171,7 @@ if (isset($_SESSION['kdsupp']) && $_SESSION['kdsupp']!=''){
                             <input type="text" id="kdobat" name="kdobat" data-type="kd_obat" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Kode Obat" value="<?=$kdobat;?>" autocomplete="off"/>
                         </div>
                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="nmobat">Nama Obat</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-5 col-sm-5 col-xs-12">
                             <input type="text" id="nmobat" name="nmobat" data-type="nm_obat" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Nama Obat" value="<?=$nmobat;?>" autocomplete="off"/>
                         </div>
                       </div>
