@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php include('head.php');
-$edit = $kdsupp = $nmsupp = NULL;
+$edit = $kdsupp = $nmsupp = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 	if (isset($_POST['kdsupp'])) $kdsupp=cek_input($_POST['kdsupp']);
@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 	
 	unset($_POST);
 	if ($edit){
-		$sql="update tsupp set kdsupp=$kdsupp, nmsupp=$nmsupp where id='$edit'; ";
+		$sql="update tsupp set kdsupp='$kdsupp', nmsupp='$nmsupp' where id='$edit'; ";
 		$db->query($sql);
 	} else {
 		$sql="insert into tsupp (kdsupp, nmsupp) values ('$kdsupp', '$nmsupp'); ";

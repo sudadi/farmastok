@@ -44,15 +44,34 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                         <tr class="headings">
                                           <th class="column-title">Kode Trans</th>
                                           <th class="column-title">Unit Penerima</th>
-                                          <th class="column-title">Tgl Trans.</th>
                                           <th class="column-title">Tot. Item</th>
                                           <th class="column-title">Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        $sql="SELECT `tobatout`.`kdtrans`, `tsatelit`.`nmsat`, `tobatout`.`qty`
-FROM `tobatout` 
-INNER JOIN `tsatelit` ON `tsatelit`.`kdsat` = `tobatout`.`kdsat"
+                                        <?php
+                                        $sql="SELECT `kdtrans`, `nmsat`, sum(`qty`) as `total` "
+                                        . "FROM `tobatout` "
+                                        . "INNER JOIN `tsatelit` ON `tsatelit`.`kdsat` = `tobatout`.`kdsat"
+                                        . "group by `kdtrans`";
+                                        $result=$db->query($sql);
+                                        if($result){
+                                            while ($row = $result->fetch_row(MYSQLI_ASSOC)) {
+                                                $notrans=$row['kdtrans'];
+                                                ?>
+                                        <tr>
+                                            <td><?=$row['kdtrans'];?></td>
+                                            <td><?=$row['nmsat'];?></td>
+                                            <td><?=$row['total'];?></td>
+                                            <td>
+                                                <a href="transobatin.php?kdtransout=<?=$notrans;?>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit fa-lg"></i></a> &nbsp;
+						<a href="#" onclick="showdetail(<?=$notrans?>)" data-toggle="tooltip" title="Detail Transaksi"><i class="fa fa-th-list fa-lg"></i></a>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div> 
