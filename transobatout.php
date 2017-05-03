@@ -182,7 +182,7 @@ if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
                           <input type="hidden" name="edit" value="<?=$edit;?>"/>
                           <button type="submit" class="btn btn-success"><?=$edit ? 'Update' : 'Simpan';?></button>
-                          <a href="transobatin.php?selesai=true" class="btn btn-warning">Selesai</a>
+                          <a href="transobatout.php?selesai=true" class="btn btn-warning">Selesai</a>
                         </div>
                       </div>
                     </form>
@@ -238,8 +238,8 @@ if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
                                         <td><?=$row['tgltrans'];?></td>
                                         <td><?=$row['nmobat'];?></td>
                                         <td><?=$row['qty'];?></td>
-                                        <td><a href="transobatin.php?edit=<?=$id;?>"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
-                                            <a href="transobatin.php?hapus=<?=$id;?>" onClick="return confirm('Yakin menghapus data tersebut?')"><i class="fa fa-trash fa-lg"></i></a>
+                                        <td><a href="transobatout.php?edit=<?=$id;?>"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
+                                            <a href="transobatout.php?hapus=<?=$id;?>" onClick="return confirm('Yakin menghapus data tersebut?')"><i class="fa fa-trash fa-lg"></i></a>
                                         </td>
                                     </tr>
                                         <?php }
