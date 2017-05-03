@@ -36,7 +36,7 @@ function setsession(){
 }
 
 function unsetsession() {
-	$unsetvar = array('kdtrans', 'kdsat', 'nmsat');
+	$unsetvar = array('kdtransout', 'kdsat', 'nmsat');
     foreach($unsetvar as $var) {
         unset($_SESSION[$var]);
     }
@@ -46,10 +46,10 @@ function pesan(){
 	global $db, $msg;
 	if ($db->affected_rows < 0) {
         $errmsg = "Error: " . $sql . "<br>" . mysqli_error($db);
-        $msg->error($errmsg, 'transobatin.php');
+        $msg->error($errmsg, 'transobatout.php');
         return(TRUE);
     } else {
-        $msg->success('Data berhasil proses!', 'transobatin.php');
+        $msg->success('Data berhasil proses!', 'transobatout.php');
     	return(FALSE);
     }
 }
@@ -85,7 +85,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 }else {
     if(isset($_GET['kdtrans']) && $_GET['kdtrans'] !=''){
         $kdtrans=cek_input($_GET['kdtrans']);
-        $sql="SELECT tsat.* FROM tsat INNER JOIN tobatout ON tsat.kdsat = tobatout.kdsat  WHERE kdtrans ='$kdtrans' GROUP BY kdtrans"; 
+        $sql="SELECT tsatelit.* FROM tsatelit INNER JOIN tobatout ON tsatelit.kdsat = tobatout.kdsat  WHERE kdtrans ='$kdtrans' GROUP BY kdtrans"; 
         $result=$db->query($sql);
         if ($result->num_rows == 1){
             $row=$result->fetch_array(MYSQLI_ASSOC);
@@ -112,7 +112,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         unsetsession();
         header('location:obatout.php');
     }
-    if (isset($_SESSION['kdtrans'])) {
+    if (isset($_SESSION['kdtransout'])) {
     	getsession();	
     }else{
         header("location:obatout.php");
@@ -141,11 +141,11 @@ if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
                 <div class="x_panel">
                   <div class="x_title">
                     <?php $msg->display();?>
-                    <h2>Input Data Penerimaan Obat</h2>
+                    <h2>Input Data Pengeluaran Obat</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                      <form data-parsley-validate class="form-horizontal form-label-left" action="transobatin.php" method="post">
+                      <form data-parsley-validate class="form-horizontal form-label-left" action="transobatout.php" method="post">
                       <div class="form-group">
                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="kdtrans">No.Trans</label>
                         <div class="col-md-2 col-sm-2 col-xs-12">
