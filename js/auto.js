@@ -10,7 +10,7 @@
                         }else if(tipe[1] == 'obat') { 
                             ajaxurl='cariobat.php'; 
                         }else{
-                            ajaxurl='carisat.php'
+                            ajaxurl='carisat.php';
                         }
 			$(this).autocomplete({
 				source: function( request, response ) {
