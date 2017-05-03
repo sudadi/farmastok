@@ -85,5 +85,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </div>
 </div>
 <?php include('footerjs.php'); ?>
+<script>
+function showdetail(notrans) {
+	$.ajax({
+	type:"post",
+	url	:"ajaxobatout.php",
+	data:"notrans="+notrans,
+	success:function(data){
+		$("#detail").html(data);
+		$('#modaldetail').modal('show');
+	}
+	});
+}
+</script>
 </body>
 </html>
