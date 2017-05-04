@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 03 Mei 2017 pada 14.37
+-- Generation Time: 04 Mei 2017 pada 14.04
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -57,6 +57,8 @@ CREATE TABLE `tobatin` (
   `tgltrans` date NOT NULL,
   `kdobat` varchar(15) NOT NULL,
   `qty` int(11) NOT NULL,
+  `keluar` int(6) NOT NULL,
+  `sisa` int(6) NOT NULL,
   `stat` varchar(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -64,10 +66,10 @@ CREATE TABLE `tobatin` (
 -- Dumping data untuk tabel `tobatin`
 --
 
-INSERT INTO `tobatin` (`id`, `kdtrans`, `kdsupp`, `tgltrans`, `kdobat`, `qty`, `stat`) VALUES
-(21, '20170502001', '020230', '2017-05-02', '0123001', 3, ''),
-(22, '20170502001', '020230', '2017-05-02', '0123002', 6, ''),
-(23, '20170502002', '020230', '2017-05-02', '0123002', 2, '');
+INSERT INTO `tobatin` (`id`, `kdtrans`, `kdsupp`, `tgltrans`, `kdobat`, `qty`, `keluar`, `sisa`, `stat`) VALUES
+(21, '20170502001', '020230', '2017-05-02', '0123001', 3, 2, 1, ''),
+(22, '20170502001', '020230', '2017-04-02', '0123002', 6, 4, 2, ''),
+(23, '20170502002', '020230', '2017-05-02', '0123002', 6, 0, 6, '');
 
 -- --------------------------------------------------------
 
@@ -81,7 +83,7 @@ CREATE TABLE `tobatout` (
   `kdsat` varchar(5) NOT NULL,
   `kdobat` varchar(15) NOT NULL,
   `qty` int(3) NOT NULL,
-  `tgltrans` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tgltrans` date NOT NULL,
   `opt` varchar(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -90,8 +92,39 @@ CREATE TABLE `tobatout` (
 --
 
 INSERT INTO `tobatout` (`id`, `kdtrans`, `kdsat`, `kdobat`, `qty`, `tgltrans`, `opt`) VALUES
-(5, '20170503001', '0002', '0123001', 4, '2017-05-03 19:22:32', ''),
-(6, '20170503001', '0002', '0123002', 3, '2017-05-03 19:22:57', '');
+(16, '20170504010', '0002', '0123002', 2, '2017-05-04', ''),
+(15, '20170504009', '0002', '0123002', 2, '2017-05-04', ''),
+(17, '20170504010', '0002', '0123001', 2, '2017-05-04', '');
+
+--
+-- Trigger `tobatout`
+--
+DELIMITER $$
+CREATE TRIGGER `OBATOUT_AFINSERT` AFTER INSERT ON `tobatout` FOR EACH ROW BEGIN
+SET @KODE=NEW.KDOBAT;
+SET @JKELUAR=NEW.QTY;
+SET @ID=(SELECT ID FROM TOBATIN WHERE KDOBAT=@KODE AND SISA>0 ORDER BY TGLTRANS  LIMIT 1);
+SET @SISA=(SELECT SISA FROM TOBATIN WHERE ID=@ID);
+REPEAT
+IF(@SISA>@JKELUAR) THEN
+UPDATE TOBATIN SET SISA=@SISA-@JKELUAR, KELUAR=KELUAR+@JKELUAR WHERE ID=@ID;
+SET @JKELUAR=0;
+END IF;
+IF (@SISA<@JKELUAR) THEN
+UPDATE TOBATIN SET SISA=0, KELUAR=KELUAR+@SISA WHERE ID=@ID;
+SET @JKELUAR=@JKELUAR-@SISA;
+SET @ID=(SELECT ID FROM TOBATIN WHERE KDOBAT=@KODE AND SISA>0 ORDER BY TGLTRANS LIMIT 1);
+SET @SISA=(SELECT SISA FROM TOBATIN WHERE ID=@ID);
+END IF;
+IF(@SISA=@JKELUAR) THEN
+UPDATE TOBATIN SET SISA=0,KELUAR=KELUAR+@JKELUAR WHERE ID=@ID;
+SET @JKELUAR=0;
+END IF;
+UNTIL @JKELUAR=0
+END REPEAT;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -229,7 +262,7 @@ ALTER TABLE `tobatin`
 -- AUTO_INCREMENT for table `tobatout`
 --
 ALTER TABLE `tobatout`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `tsatelit`
 --
