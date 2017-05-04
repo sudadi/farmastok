@@ -70,12 +70,12 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         if (isset($_POST['nmobat'])) $nmobat = cek_input($_POST['nmobat']);
         if (isset($_POST['qty'])) $qty = cek_input ($_POST['qty']);
 
-        if($kdtrans!='' || $kdsat!='' || $nmsat!='' || $kdobat!='' || $nmobat!='' || $qty<1){
+        if($kdtrans!='' && $kdsat!='' && $nmsat!='' && $kdobat!='' && $nmobat!='' && $qty>0){
             if ($edit !=''){ //jika edit data
                 $sql = "update tobatout set kdsat='$kdsat', kdobat='$kdobat', qty='$qty' where id='$edit'";
                 $db->query($sql);
             }else { //insert data 
-                $sql="INSERT INTO `tobatout` (`kdtrans`, `kdsat`, `kdobat`, `qty`) values ('$kdtrans', '$kdsat', '$kdobat', '$qty') ON DUPLICATE KEY UPDATE qty = qty+$qty";
+                $sql="INSERT INTO tobatout (kdtrans, kdsat, kdobat, tgltrans, qty, opt) values ('$kdtrans', '$kdsat', '$kdobat', curdate(), '$qty', '') ON DUPLICATE KEY UPDATE qty = qty+$qty";
                 $db->query($sql);
             }
             setsession();
