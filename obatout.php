@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-plus-square"></i> Trans. Pengeluaran Obat</button>
                             </form> 
                             <br /><br />
-                            <form action="obatin.php" method="post" data-parsley-validate class="form-horizontal form-label-left">
+                            <form action="obatout.php" method="post" data-parsley-validate class="form-horizontal form-label-left">
                                 <div class="form-group">
                                     <label for="filtgl" class="control-label col-sm-2">Filter Tanggal</label>
                                     <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql="SELECT `kdtrans`, `nmsat`, sum(`qty`) as `total` FROM `tobatout` INNER JOIN `tsatelit` ON `tsatelit`.`kdsat` = `tobatout`.`kdsat` group by `kdtrans`";
+                                        $sql="SELECT `kdtrans`, `nmsat`, sum(`qty`) as `total` FROM `tobatout` INNER JOIN `tsatelit` ON `tsatelit`.`kdsat` = `tobatout`.`kdsat` where date(tgltrans) = '$tgltrans' group by `kdtrans`";
                                         $result=$db->query($sql);
                                         if($result){
                                             while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
