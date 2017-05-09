@@ -103,8 +103,9 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
             $kdobat=$row['kdobat'];
             $nmobat=$row['nmobat'];
             $qty=$row['qty'];
-			$hrg=$row['hjual'];
-		}
+            $hrg=$row['hjual'];
+            
+	}
     } elseif (isset ($_GET['hapus']) && $_GET['hapus'] !='') {
         $hapus= cek_input($_GET['hapus']);
         $sql="delete from tobatout where id = '$hapus'";
@@ -190,7 +191,7 @@ if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
                           <input type="hidden" name="edit" value="<?=$edit;?>"/>
-						  <input type="hidden" id="stokval" value="0">
+			  <input type="hidden" id="stokval" value="0">
                           <button type="submit" id="simpan" class="btn btn-success"><?=$edit ? 'Update' : 'Simpan';?></button>
                           <a href="transobatout.php?selesai=true" class="btn btn-warning">Selesai</a>
                         </div>
@@ -247,8 +248,8 @@ if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
                                         <td><?=$row['kdobat'];?></td>
                                         <td><?=$row['nmobat'];?></td>
                                         <td><?=$row['qty'];?></td>
-										<td><?=$row['jml'];?></td>
-                                        <td><a href="transobatout.php?edit=<?=$id;?>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
+					<td><?=$row['jml'];?></td>
+                                        <td><!--<a href="transobatout.php?edit=<?//=$id;?>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit fa-lg"></i></a>&nbsp;-->
                                             <a href="transobatout.php?hapus=<?=$id;?>" onClick="return confirm('Yakin menghapus data tersebut?')" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash fa-lg"></i></a>
                                         </td>
                                     </tr>
