@@ -182,7 +182,7 @@ if (isset($_SESSION['kdsupp']) && $_SESSION['kdsupp']!=''){
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <input type="number" id="qty" name="qty" class="form-control col-md-12" required="required" value="<?=$qty;?>" />
                         </div>
-                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="hrg">Jumlah</label>
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="hrg">Harga</label>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <input type="number" id="hrg" name="hrg" class="form-control col-md-12" required="required" value="<?=$hrg;?>" />
                         </div>
