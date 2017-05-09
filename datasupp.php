@@ -141,8 +141,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                             <td class=" "><?php echo $row['nmsupp'];?></td>
                             <td class=" "><?php echo $row['almsupp'];?></td>
                             <td class=" ">
-                            <a href="<?php echo 'datasupp.php?edit='.$id;?>" data-toggle="tooltip" title="Edit"><span class="fa fa-edit"></span></a> &nbsp
-                            <a href="<?php echo 'datasupp.php?hapus='.$id;?>" data-toggle="tooltip" title="Hapus"><span class="fa fa-trash" onClick="return confirm('Yakin menghapus data tersebut?')"></span></a>
+                            <a href="<?php echo 'datasupp.php?edit='.$id;?>" data-toggle="tooltip" title="Edit"><span class="fa fa-edit fa-lg"></span></a> &nbsp
+                            <a href="<?php echo 'datasupp.php?hapus='.$id;?>" data-toggle="tooltip" title="Hapus"><span class="fa fa-trash fa-lg" onClick="return confirm('Yakin menghapus data tersebut?')"></span></a>
                             </td>
                             </tr>
                         <?php $n++; } ?>
