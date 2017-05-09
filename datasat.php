@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php include('head.php');
-$edit = $kdsat = $nmsat = NULL;
+$edit = $kdsat = $nmsat = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 	if (isset($_POST['kdsat'])) $kdsat=cek_input($_POST['kdsat']);
@@ -10,11 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 	if (isset($_POST['edit'])) $edit=cek_input($_POST['edit']);
 	
 	unset($_POST);
-	if ($edit){
-		$sql="update tsatelit set kdsat=$kdsat, nmsat=$nmsat where id='$edit'; ";
+    if ($kdsat != '' && $nmsat != ''){
+	if ($edit != ''){
+		$sql="update tsatelit set kdsat='$kdsat', nmsat='$nmsat' where id='$edit' ";
 		$db->query($sql);
 	} else {
-		$sql="insert into tsatelit (kdsat, nmsat) values ('$kdsat', '$nmsat'); ";
+		$sql="insert into tsatelit (kdsat, nmsat) values ('$kdsat', '$nmsat') ";
 		$db->query($sql);
 	}
 	if ($db->affected_rows < 0){
@@ -23,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 	} else {
 		$msg->success('Update data berhasil!', 'datasat.php');
 	}
+    }
 } else {
 	if (isset($_GET['edit'])) {
 		$edit=$_GET['edit'];
@@ -65,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
+                    <?php $msg->display();?>
                     <h2>Update Data Apotik Satelit</h2>
                     <div class="clearfix"></div>
                   </div>
@@ -78,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nmsuppt">Nama Satelit<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nmsat">Nama Satelit<span class="required">*</span>
                         </label>
                         <div class="col-md-8 col-sm-8 col-xs-12">
                           <input type="text" id="nmsat" name="nmsat" required="required" class="form-control col-md-12 col-xs-12" placeholder="Nama Apotik Satelit" value="<?=$nmsat;?>" />
@@ -88,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
                           <input type="hidden" name="edit" value="<?=$edit;?>"/>
-						  <a href="datasat.php" class="btn btn-primary">Reset</a>
+			  <a href="datasat.php" class="btn btn-primary">Reset</a>
                           <button type="submit" class="btn btn-success"><?=$edit ? 'Update' : 'Simpan';?></button>
                         </div>
                       </div>
@@ -128,8 +131,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                             <td class=" "><?php echo $row['kdsat'];?></td>
                             <td class=" "><?php echo $row['nmsat'];?></td>
                             <td class=" ">
-                            <a href="<?php echo 'datasat.php?edit='.$id;?>" data-toggle="tooltip" title="Edit"><span class="fa fa-edit"></span></a> &nbsp
-                            <a href="<?php echo 'datasat.php?hapus='.$id;?>" data-toggle="tooltip" title="Hapus"><span class="fa fa-trash" onClick="return confirm('Yakin menghapus data tersebut?')"></span></a>
+                            <a href="<?php echo 'datasat.php?edit='.$id;?>" data-toggle="tooltip" title="Edit"><span class="fa fa-edit fa-lg"></span></a> &nbsp
+                            <a href="<?php echo 'datasat.php?hapus='.$id;?>" data-toggle="tooltip" title="Hapus"><span class="fa fa-trash fa-lg" onClick="return confirm('Yakin menghapus data tersebut?')"></span></a>
                             </td>
                             </tr>
                         <?php $n++; } ?>
