@@ -2,26 +2,27 @@
 <html lang="en">
 
 <?php include('head.php');
-$edit = $kdsupp = $nmsupp = '';
+$edit = $kdsupp = $nmsupp = $almsupp = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 	if (isset($_POST['kdsupp'])) $kdsupp=cek_input($_POST['kdsupp']);
 	if (isset($_POST['nmsupp'])) $nmsupp=cek_input($_POST['nmsupp']);
+	if (isset($_POST['almsupp'])) $almsupp=cek_input($_POST['almsupp']);
 	if (isset($_POST['edit'])) $edit=cek_input($_POST['edit']);
 	
 	unset($_POST);
 	if ($edit){
-		$sql="update tsupp set kdsupp='$kdsupp', nmsupp='$nmsupp' where id='$edit'; ";
+		$sql="update tsupp set kdsupp='$kdsupp', nmsupp='$nmsupp', almsupp='$almsupp' where id='$edit'; ";
 		$db->query($sql);
 	} else {
-		$sql="insert into tsupp (kdsupp, nmsupp) values ('$kdsupp', '$nmsupp'); ";
+		$sql="insert into tsupp (kdsupp, nmsupp, almsupp) values ('$kdsupp', '$nmsupp', '$almsupp'); ";
 		$db->query($sql);
 	}
-	if ($db->affected_rows > 0){
-		$errmsg = "Error: Update data obat gagal!";
+	if ($db->affected_rows < 0){
+		$errmsg = "Error: Data Supplier gagal disimpan!";
 		$msg->error($errmsg, 'datasupp.php');
 	} else {
-		$msg->success('Update data berhasil!', 'datasupp.php');
+		$msg->success('Data Supplier berhasil di proses.', 'datasupp.php');
 	}
 } else {
 	if (isset($_GET['edit'])) {
@@ -32,17 +33,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 			while($row = $result->fetch_array(MYSQL_ASSOC)){
 				$kdsupp = $row['kdsupp'];
 				$nmsupp = $row['nmsupp'];
+                $almsupp= $row['almsupp'];
 			}			
 		}
 	} else if (isset($_GET['hapus'])){
 		$hapus = $_GET['hapus'];
 		$sql = "delete from tsupp where id=$hapus ";
 		$db->query($sql);
-		if ($db->affected_rows > 0){
-			//$msg->success('Data Sudah di Hapus!', 'datasupp.php');
+		if ($db->affected_rows < 0){
+			$errmsg="Error: Gagal menghapus data";
+			$msg->error($errmsg, 'datasupp.php');
 		} else {
-			$errmsg="Error: " . $sql . "<br>" . mysqli_error($db);
-			$msg->error($errmsg);
+            $msg->success('Data berhasil di Hapus!', 'datasupp.php');			
 		}
 	}
 	
@@ -66,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
+                    <?php $msg->display();?>
                     <h2>Update Data Supplier</h2>
                     <div class="clearfix"></div>
                   </div>
@@ -76,6 +79,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                         </label>
                         <div class="col-md-3 col-sm-3 col-xs-12">
                           <input type="text" id="kdsupp" name="kdsupp" required="required" class="form-control col-md-12 col-xs-12" placeholder="Kode Supplier" <?=$edit ? 'value="'.$kdsupp.'"':'';?> />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="almsupp">Alamat Supplier<span class="required">*</span>
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                          <input type="text" id="almsupp" name="almsupp" required="required" class="form-control col-md-12 col-xs-12" placeholder="Alamat Supplier" value="<?=$almsupp;?>" />
                         </div>
                       </div>
                       <div class="form-group">
@@ -114,6 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                           <tr class="headings">
                             <th class="column-title">Kode </th>
                             <th class="column-title">Nama Supplier</th>
+                            <th class="column-title">Alamat</th>
                             <th class="column-title">Opsi</th>
                           </tr>
                         </thead>
@@ -128,6 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                           <tr class="<?=($n%2)==0 ? 'even ':'odd ';?> pointer">
                             <td class=" "><?php echo $row['kdsupp'];?></td>
                             <td class=" "><?php echo $row['nmsupp'];?></td>
+                            <td class=" "><?php echo $row['almsupp'];?></td>
                             <td class=" ">
                             <a href="<?php echo 'datasupp.php?edit='.$id;?>" data-toggle="tooltip" title="Edit"><span class="fa fa-edit"></span></a> &nbsp
                             <a href="<?php echo 'datasupp.php?hapus='.$id;?>" data-toggle="tooltip" title="Hapus"><span class="fa fa-trash" onClick="return confirm('Yakin menghapus data tersebut?')"></span></a>

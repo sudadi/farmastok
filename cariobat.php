@@ -13,11 +13,11 @@ if(!empty($_POST['field']) && !empty($_POST['name_startsWith'])){
 		$field = 'nmobat';
 	} 
 	$name = $_POST['name_startsWith'];
-	$query = "SELECT kdobat, nmobat FROM tobat WHERE $field LIKE '$name%' order by kdobat";
+	$query = "SELECT kdobat, nmobat, hbeli FROM tobat WHERE $field LIKE '$name%' order by kdobat";
 	$result = $db->query($query);
 	$data = array();
 	while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-		$name = $row['kdobat'].'|'.$row['nmobat'];
+		$name = $row['kdobat'].'|'.$row['nmobat'].'|'.$row['hbeli'];
 		array_push($data, $name);
 	}	
 	echo json_encode($data);exit;

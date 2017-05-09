@@ -8,24 +8,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		<table class="table table-striped jambo_table bulk_action">
 		  <thead>
 			<tr class="headings">
-			  <th class="column-title">No</th>
 			  <th class="column-title">Kode Obat</th>
 			  <th class="column-title">Nama Obat</th>
 			  <th class="column-title">Qty</th>
+			  <th class="column-title">Jumlah</th>
 			</tr>
 			</thead>
 			<tbody>
 				<?php
-				$sql="SELECT tobatout.*, tobat.nmobat FROM tobatout INNER JOIN tobat on tobatout.kdobat=tobat.kdobat WHERE kdtrans='$kdtrans'";
+				$sql="SELECT tobat.kdobat, qty, (qty*tobatout.hjual) as jml, nmobat FROM tobatout INNER JOIN tobat on tobatout.kdobat=tobat.kdobat WHERE kdtrans='$kdtrans'";
 				$result=$db->query($sql);
 				if ($result){
 					while ($row = $result->fetch_array(MYSQLI_ASSOC)){ 
-						$id=$row['id']; ?>
+						?>
 				<tr>
-					<td><?=$row['kdtrans'];?></td>
-					<td><?=$row['tgltrans'];?></td>
+					<td><?=$row['kdobat'];?></td>
 					<td><?=$row['nmobat'];?></td>
 					<td><?=$row['qty'];?></td>
+				    <td><?=$row['jml'];?></td>
 				</tr>
 					<?php }
 				}

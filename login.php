@@ -77,8 +77,8 @@
                 <div class="clearfix"></div>
                 <br />
                 <div>
-                  <h1><i class="fa fa-paw"></i> FarmaStok</h1>
-                  <p>By Asrul ©2017 All Rights Reserved.</p>
+                  <h1><i class="fa fa-th-large"></i> FarmaStok</h1>
+                  <p>By Asrul © 2017 All Rights Reserved.</p>
                 </div>
               </div>
             </form>

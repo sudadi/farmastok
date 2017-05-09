@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
+                    <?php $msg->display();?>
                     <h2>Update Password</h2>
                     <div class="clearfix"></div>
                   </div>

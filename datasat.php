@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 		$sql="insert into tsatelit (kdsat, nmsat) values ('$kdsat', '$nmsat'); ";
 		$db->query($sql);
 	}
-	if ($db->affected_rows > 0){
-		$errmsg = "Error: Update data obat gagal!";
+	if ($db->affected_rows < 0){
+		$errmsg = "Error: Update data depo gagal!";
 		$msg->error($errmsg, 'datasat.php');
 	} else {
 		$msg->success('Update data berhasil!', 'datasat.php');
@@ -38,11 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 		$hapus = $_GET['hapus'];
 		$sql = "delete from tsatelit where id=$hapus ";
 		$db->query($sql);
-		if ($db->affected_rows > 0){
-			$msg->success('Data Sudah di Hapus!', 'datasat.php');
-		} else {
-			$errmsg="Error: " . $sql . "<br>" . mysqli_error($db);
+		if ($db->affected_rows < 0){
+			$errmsg="Error: Gagal menghapus data.";
 			$msg->error($errmsg);
+		} else {
+			$msg->success('Data Sudah di Hapus!', 'datasat.php');
 		}
 	}
 	

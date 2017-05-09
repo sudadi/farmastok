@@ -23,7 +23,7 @@
                 $sql="insert into tobat (kdobat, nmobat, satuan, limitstok, hbeli, hjual) values ('$kdobat','$nmobat','$satuan', '$limitstok','$hbeli','$hjual') ";
                 $db->query($sql);			
             }
-            if ($db->affected_rows < 1) {
+            if ($db->affected_rows < 0) {
                 $errmsg = "Error: Update data obat gagal!";
                 $msg->error($errmsg, 'dataobat.php');
             } else {
@@ -51,7 +51,7 @@
             if (mysqli_query($db, $sql)){
                 $msg->success('Data Sudah di Hapus!', 'dataobat.php');	
             } else {
-                $errmsg="Error: " . $sql . "<br>" . mysqli_error($db);
+                $errmsg="Error: Gagal menghapus data.";
                 $msg->error($errmsg);
             }
         }
@@ -80,6 +80,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
+                    <?php $msg->display();?>
                     <h2>Simpan Data Obat</h2>
                     <div class="clearfix"></div>
                   </div>
@@ -182,16 +183,14 @@
                         <?php } ?>
                         </tbody>
                       </table>                    
-                    
+                    </div>
                   </div>
+				</div>
               </div>
-            </div>
-          </div>
-		</div>
-	  </div>
+		  </div>
+	    </div>
 		<?php include('footer.php'); ?>
 	</div>
-</div>
 <?php include('footerjs.php'); ?>
 </body>
 </html>

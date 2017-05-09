@@ -1,7 +1,8 @@
 <!-- footer content -->
 <footer>
   <div class="pull-right">
-	Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+	<p>Copyright &copy; Asrul 2017</p>
+	<p>Powered By Bootstrap</p>
   </div>
   <div class="clearfix"></div>
 </footer>

@@ -6,12 +6,14 @@
 			if(tipe[0] == 'kd' ) autoTypeNo=0;
 			if(tipe[0] == 'nm' ) autoTypeNo=1; 
 			if(tipe[1] == 'supp') { 
-                            ajaxurl='carisupp.php'; 
-                        }else if(tipe[1] == 'obat') { 
-                            ajaxurl='cariobat.php'; 
-                        }else{
-                            ajaxurl='carisat.php';
-                        }
+				ajaxurl='carisupp.php'; 
+			}else if(tipe[1] == 'obat') { 
+				ajaxurl='cariobat.php'; 
+			}else if(tipe[1] == 'obatout') { 
+				ajaxurl='cariobatout.php'; 
+			}else{
+				ajaxurl='carisat.php';
+			}
 			$(this).autocomplete({
 				source: function( request, response ) {
 					$.ajax({
@@ -43,13 +45,22 @@
 						$('#kdsupp').val(names[0]);
 						$('#nmsupp').val(names[1]);
 						$('#almsupp').val(names[2]);
+					} else if ( tipe[1] == 'obatout' ){
+						$('#kdobat').val(names[0]);
+						$('#nmobat').val(names[1]);
+						$('#stok').html(names[2]);
+						$('#limit').html(names[3]);
+						$('#hrg').val(names[4]);
+						var stok = names[2].split(":");
+						$('#stokval').val(stok[1]);
 					} else if ( tipe[1] == 'obat' ){
 						$('#kdobat').val(names[0]);
 						$('#nmobat').val(names[1]);
+                        $('#hrg').val(names[2]);
 					} else {
-                                            $('#kdsat').val(names[0]);
-                                            $('#nmsat').val(names[1]);
-                                        }
+						$('#kdsat').val(names[0]);
+						$('#nmsat').val(names[1]);
+					}
 				}
 			});
 		});

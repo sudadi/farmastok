@@ -9,7 +9,7 @@
    		$result = mysqli_query($db, "select userid from tuser where userid = '$user_check'");
    		//$row = mysqli_fetch_array($result);
   		//$login_session = $row['user'];
-  		if ((!$result) || (isset($_SESSION['tgl']) && $_SESSION['tgl'] < date('Y/m/d'))){
+  		if (($result->num_rows == 0) || (isset($_SESSION['tgl']) && $_SESSION['tgl'] < date('Y/m/d'))){
 			// last request was more than 30 minutes ago
 			session_unset();     // unset $_SESSION variable for the run-time 
 			session_destroy();   // destroy session data in storage

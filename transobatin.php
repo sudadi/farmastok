@@ -3,7 +3,7 @@
 
 <?php include('head.php');
 $kdtrans = $kdsupp = $nmsupp = $almsupp = $kdobat = $nmobat = $edit = $onlyread = $hide ='' ;
-$qty='';
+$qty=$hrg=0;
 function newtrans(){
 	global $db;
 	$today = date("Ymd");
@@ -71,13 +71,14 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         if(isset($_POST['kdobat'])) $kdobat = cek_input($_POST['kdobat']);
         if (isset($_POST['nmobat'])) $nmobat = cek_input($_POST['nmobat']);
         if (isset($_POST['qty'])) $qty = cek_input ($_POST['qty']);
+        if (isset($_POST['hrg'])) $hrg = cek_input ($_POST['hrg']);
         
-        if($kdtrans!='' || $kdsupp!='' || $nmsupp!='' || $kdobat!='' || $nmobat!='' || $qty<1){
+        if($kdtrans!='' && $kdsupp!='' && $nmsupp!='' && $kdobat!='' && $nmobat!='' && $qty>0 && $hrg>0){
         	if ($edit !=''){ //jika edit data
-				$sql = "update tobatin set kdsupp='$kdsupp', kdobat='$kdobat', qty='$qty' where id='$edit'";
+				$sql = "update tobatin set kdsupp='$kdsupp', kdobat='$kdobat', qty='$qty', hbeli='$hrg' where id='$edit'";
                 $db->query($sql);
 			}else { //insert data 
-				$sql="INSERT INTO `tobatin` (`kdtrans`, `kdsupp`, `tgltrans`, `kdobat`, `qty`) values ('$kdtrans', '$kdsupp', CURRENT_DATE, '$kdobat', '$qty') ON DUPLICATE KEY UPDATE qty = qty+$qty";
+				$sql="INSERT INTO `tobatin` (`kdtrans`, `kdsupp`, `tgltrans`, `kdobat`, `qty`, `hbeli`) values ('$kdtrans', '$kdsupp', CURRENT_DATE, '$kdobat', '$qty', '$hrg') ON DUPLICATE KEY UPDATE qty = qty+$qty, hbeli='$hrg'";
                 $db->query($sql);
 			}
 			setsession();
@@ -98,13 +99,14 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 		}
     } else if(isset($_GET['edit']) && $_GET['edit'] != ''){
         $edit = cek_input($_GET['edit']);
-        $sql="select tobat.kdobat, nmobat, qty from tobatin inner join tobat on tobatin.kdobat=tobat.kdobat where tobatin.id='$edit'";
+        $sql="select tobat.kdobat, nmobat, tobat.hbeli, qty from tobatin inner join tobat on tobatin.kdobat=tobat.kdobat where tobatin.id='$edit'";
         $result=$db->query($sql);
         if($result->num_rows == 1){
             $row = $result->fetch_array(MYSQLI_ASSOC);
             $kdobat=$row['kdobat'];
             $nmobat=$row['nmobat'];
             $qty=$row['qty'];
+            $hrg=$row['hrg'];
 		}
     } elseif (isset ($_GET['hapus']) && $_GET['hapus'] !='') {
         $hapus= cek_input($_GET['hapus']);
@@ -180,6 +182,10 @@ if (isset($_SESSION['kdsupp']) && $_SESSION['kdsupp']!=''){
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <input type="number" id="qty" name="qty" class="form-control col-md-12" required="required" value="<?=$qty;?>" />
                         </div>
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="hrg">Jumlah</label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <input type="number" id="hrg" name="hrg" class="form-control col-md-12" required="required" value="<?=$hrg;?>" />
+                        </div>
                       </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
@@ -224,27 +230,27 @@ if (isset($_SESSION['kdsupp']) && $_SESSION['kdsupp']!=''){
                                 <table class="table table-striped jambo_table bulk_action">
                                 <thead>
                                 <tr class="headings">
-                                  <th class="column-title">No</th>
                                   <th class="column-title">Kode Obat</th>
                                   <th class="column-title">Nama Obat</th>
                                   <th class="column-title">Qty</th>
+                                  <th class="column-title">Jumlah</th>
                                   <th class="column-title">Opsi</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql="SELECT tobatin.*, tobat.nmobat FROM tobatin INNER JOIN tobat on tobatin.kdobat=tobat.kdobat WHERE kdtrans='$kdtrans'";
+                                    $sql="SELECT tobatin.id, tobatin.kdobat, qty, (qty*tobatin.hbeli) as jml, tobat.nmobat FROM tobatin INNER JOIN tobat on tobatin.kdobat=tobat.kdobat WHERE kdtrans='$kdtrans'";
                                     $result=$db->query($sql);
                                     if ($result){
                                         while ($row = $result->fetch_array(MYSQLI_ASSOC)){ 
                                             $id=$row['id']; ?>
                                     <tr>
-                                        <td><?=$row['kdtrans'];?></td>
-                                        <td><?=$row['tgltrans'];?></td>
+                                        <td><?=$row['kdobat'];?></td>
                                         <td><?=$row['nmobat'];?></td>
                                         <td><?=$row['qty'];?></td>
-                                        <td><a href="transobatin.php?edit=<?=$id;?>"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
-                                            <a href="transobatin.php?hapus=<?=$id;?>" onClick="return confirm('Yakin menghapus data tersebut?')"><i class="fa fa-trash fa-lg"></i></a>
+                                        <td><?=$row['jml'];?></td>
+                                        <td><a href="transobatin.php?edit=<?=$id;?>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
+                                            <a href="transobatin.php?hapus=<?=$id;?>" data-toggle="tooltip" title="Hapus" onClick="return confirm('Yakin menghapus data tersebut?')"><i class="fa fa-trash fa-lg"></i></a>
                                         </td>
                                     </tr>
                                         <?php }

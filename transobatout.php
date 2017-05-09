@@ -3,7 +3,7 @@
 
 <?php include('head.php');
 $kdtrans = $kdsat = $nmsat = $kdobat = $nmobat = $edit = $onlyread ='' ;
-$qty='';
+$qty = $hrg = 0;
 function newtrans(){
     global $db;
     $today = date("Ymd");
@@ -63,6 +63,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         }
     } else {
         if(isset($_POST['edit'])) $edit = $_POST['edit'];
+		if(isset($_POST['hrg'])) $hrg = $_POST['hrg'];
         if(isset($_POST['kdtrans'])) $kdtrans=$_POST['kdtrans'];
         if(isset($_POST['kdsat'])) $kdsat = cek_input ($_POST['kdsat']);
         if(isset($_POST['nmsat'])) $nmsat = cek_input ($_POST['nmsat']);
@@ -70,12 +71,12 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         if (isset($_POST['nmobat'])) $nmobat = cek_input($_POST['nmobat']);
         if (isset($_POST['qty'])) $qty = cek_input ($_POST['qty']);
 
-        if($kdtrans!='' && $kdsat!='' && $nmsat!='' && $kdobat!='' && $nmobat!='' && $qty>0){
+        if($kdtrans!='' && $kdsat!='' && $nmsat!='' && $kdobat!='' && $nmobat!='' && $qty>0 && $hrg>0){
             if ($edit !=''){ //jika edit data
-                $sql = "update tobatout set kdsat='$kdsat', kdobat='$kdobat', qty='$qty' where id='$edit'";
+                $sql = "update tobatout set kdsat='$kdsat', kdobat='$kdobat', qty='$qty', hjual='$hrg' where id='$edit'";
                 $db->query($sql);
             }else { //insert data 
-                $sql="INSERT INTO tobatout (kdtrans, kdsat, kdobat, tgltrans, qty, opt) values ('$kdtrans', '$kdsat', '$kdobat', curdate(), '$qty', '') ON DUPLICATE KEY UPDATE qty = qty+$qty";
+                $sql="INSERT INTO tobatout (kdtrans, kdsat, kdobat, tgltrans, qty, hjual, opt) values ('$kdtrans', '$kdsat', '$kdobat', curdate(), '$qty', '$hrg', '') ON DUPLICATE KEY UPDATE qty = qty+$qty";
                 $db->query($sql);
             }
             setsession();
@@ -95,13 +96,14 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         }
     } else if(isset($_GET['edit']) && $_GET['edit'] != ''){
         $edit = cek_input($_GET['edit']);
-        $sql="select tobat.kdobat, nmobat, qty from tobatout inner join tobat on tobatout.kdobat=tobat.kdobat where tobatout.id='$edit'";
+        $sql="select tobat.kdobat, tobat.nmobat, qty, tobatout.hjual from tobatout inner join tobat on tobatout.kdobat=tobat.kdobat where tobatout.id='$edit'";
         $result=$db->query($sql);
         if($result->num_rows == 1){
             $row = $result->fetch_array(MYSQLI_ASSOC);
             $kdobat=$row['kdobat'];
             $nmobat=$row['nmobat'];
             $qty=$row['qty'];
+			$hrg=$row['hjual'];
 		}
     } elseif (isset ($_GET['hapus']) && $_GET['hapus'] !='') {
         $hapus= cek_input($_GET['hapus']);
@@ -165,24 +167,31 @@ if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
                       <div class="form-group">
                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="kdobat">Kode Obat</label>
                         <div class="col-md-2 col-sm-2 col-xs-12">
-                            <input type="text" id="kdobat" name="kdobat" data-type="kd_obat" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Kode Obat" value="<?=$kdobat;?>" autocomplete="off"/>
+                            <input type="text" id="kdobat" name="kdobat" data-type="kd_obatout" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Kode Obat" value="<?=$kdobat;?>" autocomplete="off"/>
                         </div>
                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="nmobat">Nama Obat</label>
                         <div class="col-md-5 col-sm-5 col-xs-12">
-                            <input type="text" id="nmobat" name="nmobat" data-type="nm_obat" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Nama Obat" value="<?=$nmobat;?>" autocomplete="off"/>
+                            <input type="text" id="nmobat" name="nmobat" data-type="nm_obatout" class="form-control col-md-12 autocomplete_txt" required="required" placeholder="Nama Obat" value="<?=$nmobat;?>" autocomplete="off"/>
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="qty">Jumlah</label>
                         <div class="col-md-2 col-sm-2 col-xs-12">
-                            <input type="number" id="qty" name="qty" class="form-control col-md-12" required="required" value="<?=$qty;?>" />
+                            <input type="number" id="qty" name="qty" class="form-control col-md-12" required="required" value="<?=$qty;?>"/>
                         </div>
+						<label class="control-label col-md-2 col-sm-2 col-xs-12" for="hrg">Harga</label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <input type="number" id="hrg" name="hrg" class="form-control col-md-12" required="required" value="<?=$hrg;?>"/>
+                        </div>
+						<label id="stok" class="control-label col-sm-2 text-success"></label>
+						<label id="limit" class="control-label col-sm-2 text-danger blink"></label>
                       </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
                           <input type="hidden" name="edit" value="<?=$edit;?>"/>
-                          <button type="submit" class="btn btn-success"><?=$edit ? 'Update' : 'Simpan';?></button>
+						  <input type="hidden" id="stokval" value="0">
+                          <button type="submit" id="simpan" class="btn btn-success"><?=$edit ? 'Update' : 'Simpan';?></button>
                           <a href="transobatout.php?selesai=true" class="btn btn-warning">Selesai</a>
                         </div>
                       </div>
@@ -220,27 +229,27 @@ if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
                                 <table class="table table-striped jambo_table bulk_action">
                                 <thead>
                                 <tr class="headings">
-                                  <th class="column-title">No</th>
                                   <th class="column-title">Kode Obat</th>
                                   <th class="column-title">Nama Obat</th>
                                   <th class="column-title">Qty</th>
+								  <th class="column-title">Jumlah</th>
                                   <th class="column-title">Opsi</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql="SELECT tobatout.*, tobat.nmobat FROM tobatout INNER JOIN tobat on tobatout.kdobat=tobat.kdobat WHERE kdtrans='$kdtrans'";
+                                    $sql="SELECT tobatout.id, tobat.kdobat, qty, (qty*tobatout.hjual) as jml, nmobat FROM tobatout INNER JOIN tobat on tobatout.kdobat=tobat.kdobat WHERE kdtrans='$kdtrans'";
                                     $result=$db->query($sql);
                                     if ($result){
                                         while ($row = $result->fetch_array(MYSQLI_ASSOC)){ 
                                             $id=$row['id']; ?>
                                     <tr>
-                                        <td><?=$row['kdtrans'];?></td>
-                                        <td><?=$row['tgltrans'];?></td>
+                                        <td><?=$row['kdobat'];?></td>
                                         <td><?=$row['nmobat'];?></td>
                                         <td><?=$row['qty'];?></td>
-                                        <td><a href="transobatout.php?edit=<?=$id;?>"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
-                                            <a href="transobatout.php?hapus=<?=$id;?>" onClick="return confirm('Yakin menghapus data tersebut?')"><i class="fa fa-trash fa-lg"></i></a>
+										<td><?=$row['jml'];?></td>
+                                        <td><a href="transobatout.php?edit=<?=$id;?>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
+                                            <a href="transobatout.php?hapus=<?=$id;?>" onClick="return confirm('Yakin menghapus data tersebut?')" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash fa-lg"></i></a>
                                         </td>
                                     </tr>
                                         <?php }
@@ -284,5 +293,24 @@ if (isset($_SESSION['kdsat']) && $_SESSION['kdsat']!=''){
     </div>
 </div>
 <?php include('footerjs.php'); ?>
+<script>
+$(document).ready(function() {
+	window.setInterval(function(){
+	  $('.blink').toggle();
+	}, 300);
+	
+	$(function () {
+        $('#qty').keyup(function () {
+			var y = parseInt($('#stokval').val());
+			console.log(y);
+            if ($(this).val() < 1 || y < $(this).val()) {
+                $(':submit').prop('disabled', true);
+            } else {
+                $('#simpan').prop('disabled', false);
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>

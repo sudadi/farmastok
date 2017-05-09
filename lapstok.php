@@ -21,10 +21,40 @@
                   <h2>Laporan Persedian Obat</h2>
                   <div class="clearfix"></div>
                 </div>
+                
                 <div class="x_content">
                   <br />
-          		
-          		
+				  <div class="table-responsive">
+					  <table class="table table-striped jambo_table bulk_action">
+						<thead>
+						  <tr class="headings">
+							<th class="column-title">No. </th>
+							<th class="column-title">Nama Obat</th>
+							<th class="column-title">Persediaan</th>
+							<th class="column-title">Satuan</th>
+							<th class="column-title">Limit</th>
+						  </tr>
+						</thead>
+						<tbody>
+							<?php 
+							$sql="select tobat.kdobat, tobat.nmobat, tobat.limitstok, tobat.satuan, sum(sisa) as jml from tobatin inner join tobat on tobatin.kdobat=tobat.kdobat group by tobat.kdobat";
+							$result=$db->query($sql);
+							if ($result) {
+								while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+								  ?>
+								  <tr>
+								  <td><?=$row['kdobat'];?></td>
+								  <td><?=$row['nmobat'];?></td>
+								  <td><?=$row['jml'];?></td>
+								  <td><?=$row['satuan'];?></td>
+								  <td><?=$row['limitstok'];?></td>
+								  </tr>
+								<?php
+								}
+							} ?>
+						</tbody>
+					  </table>
+          		    </div>
           		</div>
           	  </div>
             </div>          

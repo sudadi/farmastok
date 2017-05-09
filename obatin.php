@@ -41,7 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         <input type="date" name="filtgl" id="filtgl" class="form-control" value="<?=$tgltrans;?>" required="required">
                         </div>
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
                     </div>
                   </form>
 	          	  <div class="table-responsive">
@@ -51,13 +53,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                           <th class="column-title">Kode Trans</th>
                           <th class="column-title">Nama Supplier</th>
                           <th class="column-title">Tgl Trans.</th>
-                          <th class="column-title">Tot. Item</th>
+                          <th class="column-title">Jml. Item</th>
+                          <th class="colomn-title">Total</th>
                           <th class="column-title">Opsi</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php 
-                        	$sql = "SELECT kdtrans, tgltrans, sum(qty) as total, nmsupp FROM tsupp INNER JOIN tobatin ON tsupp.kdsupp = tobatin.kdsupp where tobatin.tgltrans='$tgltrans' GROUP BY kdtrans";
+                        	$sql = "SELECT kdtrans, tgltrans, sum(qty) as jml, sum(qty*hbeli) as total, nmsupp FROM tsupp INNER JOIN tobatin ON tsupp.kdsupp = tobatin.kdsupp where tobatin.tgltrans='$tgltrans' GROUP BY kdtrans";
                         	$result = $db->query($sql);
                             $n=1;
                         	if ($result) {
@@ -67,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 									echo "<td>".$row['kdtrans']."</td>";
 									echo "<td>".$row['nmsupp']."</td>";
 									echo "<td>".$row['tgltrans']."</td> ";
+                                    echo "<td>".$row['jml']."</td>";
 									echo "<td>".$row['total']."</td>";
 									echo "<td><a href='transobatin.php?kdtrans=$notrans' data-toggle='tooltip' title='Edit'><i class='fa fa-edit fa-lg'></i></a> &nbsp";
 									echo "<a href='#' onclick=\"showdetail('$notrans');\" data-toggle='tooltip' title='Detail Transaksi'><i class='fa fa-th-list fa-lg'></i></a></td>";

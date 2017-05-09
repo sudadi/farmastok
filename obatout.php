@@ -47,13 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                         <tr class="headings">
                                           <th class="column-title">Kode Trans</th>
                                           <th class="column-title">Unit Penerima</th>
-                                          <th class="column-title">Tot. Item</th>
+                                          <th class="column-title">Jml. Item</th>
+                                          <th class="column-title">Total</th>
                                           <th class="column-title">Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql="SELECT `kdtrans`, `nmsat`, sum(`qty`) as `total` FROM `tobatout` INNER JOIN `tsatelit` ON `tsatelit`.`kdsat` = `tobatout`.`kdsat` where date(tgltrans) = '$tgltrans' group by `kdtrans`";
+                                        $sql="SELECT `kdtrans`, `nmsat`, sum(`qty`) as `jml`, sum(qty*hjual) as total FROM `tobatout` INNER JOIN `tsatelit` ON `tsatelit`.`kdsat` = `tobatout`.`kdsat` where date(tgltrans) = '$tgltrans' group by `kdtrans`";
                                         $result=$db->query($sql);
                                         if($result){
                                             while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
@@ -62,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                         <tr>
                                             <td><?=$row['kdtrans'];?></td>
                                             <td><?=$row['nmsat'];?></td>
+                                            <td><?=$row['jml'];?></td>
                                             <td><?=$row['total'];?></td>
                                             <td>
                                                 <a href="transobatout.php?kdtrans=<?=$notrans;?>" data-toggle="tooltip" title="Edit"><i class="fa fa-edit fa-lg"></i></a> &nbsp;
