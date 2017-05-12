@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			  <th class="column-title">Kode Obat</th>
 			  <th class="column-title">Nama Obat</th>
 			  <th class="column-title">Qty</th>
+                          <th class="column-title">Satuan</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -23,17 +24,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				if ($hasil) {
 				  while($baris = $hasil->fetch_array(MYSQLI_ASSOC)) {
 					$kdtrans=$baris['kdtrans'];
-					$sql="SELECT tobatin.qty, tobat.kdobat, tobat.nmobat FROM tobatin INNER JOIN tobat on tobatin.kdobat=tobat.kdobat WHERE kdtrans='$kdtrans'";
+					$sql="SELECT tobatin.qty, tobat.kdobat, tobat.nmobat, tobat.satuan FROM tobatin INNER JOIN tobat on tobatin.kdobat=tobat.kdobat WHERE kdtrans='$kdtrans'";
 					$result=$db->query($sql);
 						$n=$result->num_rows+1;
 					echo "<tr><td rowspan='".$n."'>".$kdtrans."</td>";
-					echo "<td colspan='3'> Supplier : ".$baris['nmsupp']."  Tgl. : ".$baris['tgltrans']."</td></tr>";
+					echo "<td colspan='4' class='well well-sm'> Supplier : ".$baris['nmsupp']."&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;  Tgl. : ".$baris['tgltrans']."</td></tr>";
 					while($row=$result->fetch_array(MYSQLI_ASSOC)) {
 					?>
 					  <tr>
-						<td><?=$row['kdobat'];?></td>
-						<td><?=$row['nmobat'];?></td>
-						<td><?=$row['qty'];?></td>
+						<td> <?=$row['kdobat'];?></td>
+						<td> <?=$row['nmobat'];?></td>
+						<td> <?=$row['qty'];?></td>
+                                                <td> <?=$row['satuan'];?></td>
 					  </tr>
 					<?php
 					}
