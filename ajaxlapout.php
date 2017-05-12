@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					$result=$db->query($sql);
 						$n=$result->num_rows+1;
 					echo "<tr><td rowspan='".$n."'>".$kdtrans."</td>";
-					echo "<td colspan='4' class='well well-sm'> Depo/Satelit : ".$baris['nmsat']."  Tgl. : ".$baris['tgltrans']."</td></tr>";
+					echo "<td colspan='4' class='well well-sm'> Depo/Satelit : ".$baris['nmsat']."&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;  Tgl. : ".$baris['tgltrans']."</td></tr>";
 					while($row=$result->fetch_array(MYSQLI_ASSOC)) {
 					?>
 					  <tr>
