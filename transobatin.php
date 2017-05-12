@@ -75,10 +75,10 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         
         if($kdtrans!='' && $kdsupp!='' && $nmsupp!='' && $kdobat!='' && $nmobat!='' && $qty>0 && $hrg>0){
         	if ($edit !=''){ //jika edit data
-				$sql = "update tobatin set kdsupp='$kdsupp', kdobat='$kdobat', qty='$qty', hbeli='$hrg' where id='$edit'";
+				$sql = "update tobatin set kdsupp='$kdsupp', kdobat='$kdobat', qty='$qty', hbeli='$hrg', sisa = sisa+$qty where id='$edit'";
                 $db->query($sql);
 			}else { //insert data 
-				$sql="INSERT INTO `tobatin` (`kdtrans`, `kdsupp`, `tgltrans`, `kdobat`, `qty`, `hbeli`) values ('$kdtrans', '$kdsupp', CURRENT_DATE, '$kdobat', '$qty', '$hrg') ON DUPLICATE KEY UPDATE qty = qty+$qty, hbeli='$hrg'";
+				$sql="INSERT INTO `tobatin` (`kdtrans`, `kdsupp`, `tgltrans`, `kdobat`, `qty`, `hbeli`, `sisa`) values ('$kdtrans', '$kdsupp', CURRENT_DATE, '$kdobat', '$qty', '$hrg', '$qty') ON DUPLICATE KEY UPDATE qty = qty+$qty, hbeli='$hrg', sisa = sisa+$qty";
                 $db->query($sql);
 			}
 			setsession();
