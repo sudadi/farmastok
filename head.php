@@ -22,7 +22,7 @@ function cek_input($data) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>FarmaStok</title>
-
+    <link rel="shortcut icon" href="favicon.ico" />
 	<!-- Jquery UI -->
 	<link href="vendors/jquery/dist/jquery-ui.min.css" rel="stylesheet">
     <!-- Bootstrap -->

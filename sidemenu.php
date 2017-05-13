@@ -24,9 +24,9 @@
 	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 	  <div class="menu_section">
 		<ul class="nav side-menu">
-		  <li><a href="index.php"><i class="fa fa-home"></i> Home </a> </li>
-		  <li><a href="obatin.php"><i class="fa fa-cubes"></i> Penerimaan Obat</a></li>
-		  <li><a href="obatout.php"><i class="fa fa-cube"></i> Pengeluaran Obat</a></li>
+		  <li><a href="index.php"><i class="fa fa-home"></i> Beranda </a> </li>
+		  <li><a href="obatin.php"><i class="fa fa-plus-square-o"></i> Penerimaan Obat</a></li>
+		  <li><a href="obatout.php"><i class="fa fa-minus-square-o"></i> Pengeluaran Obat</a></li>
 		  <li><a><i class="fa fa-line-chart"></i> Laporan <span class="fa fa-chevron-down"></span></a>
 		  	  <ul class="nav child_menu">
 		  	  	<li><a href="lapin.php">Laporan Penerimaan</a></li>

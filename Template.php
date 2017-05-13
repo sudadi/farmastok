@@ -25,8 +25,8 @@
                 </div>
                 <div class="x_content">
 				
-				</div>
-          	  </div>
+		</div>
+              </div>
             </div>          
           </div>
     	</div>  
