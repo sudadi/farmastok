@@ -191,7 +191,7 @@ if (isset($_SESSION['kdsupp']) && $_SESSION['kdsupp']!=''){
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
                           <input type="hidden" name="edit" value="<?=$edit;?>"/>
-						  <input type="hidden" id="almsupp" name="almsupp" value="<?=$almsupp;?>"> 
+                          <input type="hidden" id="almsupp" name="almsupp" value="<?=$almsupp;?>"> 
                           <button type="submit" class="btn btn-success"><?=$edit ? 'Update' : 'Simpan';?></button>
                           <a href="transobatin.php?selesai=true" class="btn btn-warning">Selesai</a>
                         </div>
